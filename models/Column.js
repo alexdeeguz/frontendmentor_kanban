@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ColumnSchema = mongoose.Schema({
-  title: {
+  name: {
     type: String,
   },
   board: {
