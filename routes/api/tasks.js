@@ -14,4 +14,15 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:columnId", async (req, res) => {
+  const { columnId } = req.params;
+  try {
+    const tasks = await Task.find({ status: columnId });
+    res.json(tasks);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = router;

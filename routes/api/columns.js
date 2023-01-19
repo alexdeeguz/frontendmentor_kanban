@@ -14,4 +14,15 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:boardId", async (req, res) => {
+  const { boardId } = req.params
+  try {
+    const columns = await Column.find({ board: boardId });
+    res.json(columns);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = router;
