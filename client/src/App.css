@@ -19,3 +19,16 @@
 .text--dark {
   color: #ffffff;
 }
+
+.text--medium {
+  color: #828FA3;
+}
+
+body {
+  background: #20212c;
+}
+
+.home {
+  display: flex;
+  width: min-content;
+}

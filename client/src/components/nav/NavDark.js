@@ -12,7 +12,7 @@ const NavDark = () => {
       </div>
 
       <div>
-        <button className="plus__btn bg--purple">+</button>
+        <p className="plus__btn bg--purple">+</p>
         <button>
           <img src="/assets/icon-vertical-ellipsis.svg" />
         </button>

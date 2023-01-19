@@ -14,7 +14,7 @@ const TaskSchema = mongoose.Schema({
   subtasks: [
     {
       title: { type: String },
-      done: { type: Boolean },
+      isCompleted: { type: Boolean },
     },
   ],
 });
