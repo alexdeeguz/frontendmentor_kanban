@@ -1,0 +1,16 @@
+.empty {
+  margin: 211px 16px;
+  text-align: center;
+}
+
+.empty > p {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  text-align: center;
+
+  /* Medium Grey */
+
+  color: #828fa3;
+  margin-bottom: 25px;
+}

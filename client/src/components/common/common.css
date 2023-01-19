@@ -1,0 +1,13 @@
+.btn {
+  /* padding: 9px 111px; */
+  border-radius: 24px;
+  border: none;
+}
+
+.btn--small {
+  padding: 15px 18px;
+}
+
+.btn--large {
+  padding: 9px 111px;
+}

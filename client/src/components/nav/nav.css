@@ -1,0 +1,42 @@
+.nav {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  font-size: 12px;
+}
+
+.nav > div {
+  display: flex;
+  align-items: center;
+}
+
+.nav .logo {
+  margin-right: 16px;
+}
+
+.nav .logo__title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.nav > div > button {
+  background: none;
+  border: none;
+}
+
+.nav > div > button > img {
+  margin-left: 16px;
+}
+
+.nav > div > .plus__btn {
+  background: #635fc7;
+  border-radius: 24px;
+  mix-blend-mode: normal;
+  /* opacity: 0.25; */
+  padding: 10px 18px;
+  color: #FFFFFF;
+  /* opacity: ; */
+}
