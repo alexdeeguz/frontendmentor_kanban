@@ -17,7 +17,7 @@ const Column = ({ column }) => {
       </div>
 
       {tasks.map((task) => (
-        <div className="column__card bg--dark-grey">
+        <div key={task._id} className="column__card bg--dark-grey">
           <h2>{task.title}</h2>
           <h3 className="text--medium">0 of 3 subtasks</h3>
         </div>

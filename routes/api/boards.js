@@ -17,15 +17,9 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const { id } = req.body;
   try {
-    const board = await Board.find(id);
-    // const columns = await Column.find({ board: board._id });
-    // res.json({
-    //   board,
-    //   columns,
-    // });
-    res.json(board);
+    const boards = await Board.find();
+    res.json(boards);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Server error" });

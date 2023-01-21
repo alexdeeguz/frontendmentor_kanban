@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext } from "react";
 
-import { fetchBoard } from "../actions/boards";
-import { fetchColumns } from "../actions/columns";
+import { BoardContext } from "../context/BoardContext";
 import Column from "./partials/column/Column";
-import Empty from "./partials/Empty";
 
 const Home = () => {
-  const { id } = useParams();
-  const [columns, setColomns] = useState([]);
-
-  useEffect(() => {
-    fetchColumns(id).then((res) => setColomns(res.data));
-  }, []);
+  const {
+    data: { columns },
+  } = useContext(BoardContext);
 
   return (
     <div className="home">
-      {columns.map(column => (
-        <Column column={column}/>
+      {columns?.map((column) => (
+        <Column key={column._id} column={column} />
       ))}
     </div>
   );
