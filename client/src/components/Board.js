@@ -1,6 +1,7 @@
 import { useContext } from "react";
 
 import { BoardContext } from "../context/BoardContext";
+import Overlay from "./Overlay";
 import Column from "./partials/column/Column";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       {columns?.map((column) => (
         <Column key={column._id} column={column} />
       ))}
+      <Overlay />
     </div>
   );
 };

@@ -6,7 +6,7 @@ export const BoardContext = createContext();
 
 const BoardContextProvider = ({ children }) => {
   const [data, setData] = useState({});
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -34,7 +34,7 @@ const BoardContextProvider = ({ children }) => {
         columns: columnsResponse.data,
       });
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const selectBoard = (id) => {
@@ -44,8 +44,46 @@ const BoardContextProvider = ({ children }) => {
     });
   };
 
+  const openModal = (id) => {
+    let modal = document.getElementById(id);
+    let arrow = document.getElementById("icon-arrow");
+    const overlay = document.getElementById("overlay");
+
+    if (modal === data.modal) {
+      closeModal()
+      return
+    }
+
+    switch (id) {
+      case "boards__modal":
+        arrow.style.transform = "rotate(180deg)";
+    }
+
+    modal.style.transform = "translateY(0)";
+    overlay.style.transform = "translateY(0)";
+    setData({
+      ...data,
+      modal,
+    });
+  };
+
+  const closeModal = () => {
+    const overlay = document.getElementById("overlay");
+    if (data.modal.id === "boards__modal") {
+      document.getElementById("icon-arrow").style.transform = "rotate(0deg)";
+    }
+    data.modal.style.transform = "translateY(200%)";
+    overlay.style.transform = "translateY(100%)";
+    setData({
+      ...data,
+      modal: null,
+    });
+  };
+
   return (
-    <BoardContext.Provider value={{ selectBoard, data, loading }}>
+    <BoardContext.Provider
+      value={{ closeModal, openModal, selectBoard, data, loading }}
+    >
       {children}
     </BoardContext.Provider>
   );

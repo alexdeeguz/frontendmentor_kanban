@@ -24,6 +24,10 @@
   color: #828FA3;
 }
 
+.text--main {
+  color: #635FC7;
+}
+
 body {
   background: #20212c;
 }
@@ -31,4 +35,24 @@ body {
 .home {
   display: flex;
   width: min-content;
+  position: relative;
+}
+
+.App {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#overlay {
+  width: 100vw;
+  height: calc(100vh - 64px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
 }
