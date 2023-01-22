@@ -59,8 +59,9 @@ const BoardContextProvider = ({ children }) => {
         arrow.style.transform = "rotate(180deg)";
     }
 
-    modal.style.transform = "translateY(0)";
-    overlay.style.transform = "translateY(0)";
+    // modal.style.transform = "translate(-50%, 0)";
+    modal.classList.add("modal-active")
+    overlay.style.display = "block";
     setData({
       ...data,
       modal,
@@ -72,8 +73,9 @@ const BoardContextProvider = ({ children }) => {
     if (data.modal.id === "boards__modal") {
       document.getElementById("icon-arrow").style.transform = "rotate(0deg)";
     }
-    data.modal.style.transform = "translateY(200%)";
-    overlay.style.transform = "translateY(100%)";
+    // data.modal.style.transform = "translate(-50%, 200%)";
+    data.modal.classList.remove("modal-active");
+    overlay.style.display = "none";
     setData({
       ...data,
       modal: null,

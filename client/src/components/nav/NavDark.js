@@ -3,13 +3,16 @@ import { BoardContext } from "../../context/BoardContext";
 import "./nav.css";
 
 const NavDark = () => {
-  const { openModal, data: { boards } } = useContext(BoardContext)
+  const {
+    openModal,
+    data: { boards, selectedBoard },
+  } = useContext(BoardContext);
 
   const handleClickTitle = () => {
     openModal("boards__modal");
     // let arrow = document.getElementById("icon-arrow")
     // arrow.style.transform = "rotate(180deg)"
-  }
+  };
   return (
     <nav className="nav bg--dark-grey">
       <div>
@@ -29,15 +32,15 @@ const NavDark = () => {
         </button>
       </div>
 
-      <div id="boards__modal">
+      <div id="boards__modal" className="boards__modal">
         <div className="boards__modal-content">
           <h1 className="text--medium">ALL BOARDS</h1>
           {boards?.map((board) => (
             <div
               key={board._id}
-              className="boards__modal--list-item text--medium"
+              className={`boards__modal--list-item text--medium ${selectedBoard === board._id && "selected bg--purple"}`}
             >
-              <img src="/assets/icon-board.svg" alt="board icon" />
+              {selectedBoard === board._id ? <img src="/assets/icon-board-white.svg" alt="board icon"/> : <img src="/assets/icon-board.svg" alt="board icon" />}
               <h2>{board.name}</h2>
             </div>
           ))}
