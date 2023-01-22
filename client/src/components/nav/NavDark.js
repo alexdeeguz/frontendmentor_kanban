@@ -1,6 +1,8 @@
 import { useContext } from "react";
+import AddForm from "../modals/AddForm";
 import { BoardContext } from "../../context/BoardContext";
 import "./nav.css";
+import EditForm from "../modals/EditForm";
 
 const NavDark = () => {
   const {
@@ -14,8 +16,8 @@ const NavDark = () => {
   };
 
   const handleClickAddTask = () => {
-    openModal("form__modal")
-  }
+    openModal("form__modal--add");
+  };
   return (
     <nav className="nav bg--dark-grey">
       <div>
@@ -29,7 +31,9 @@ const NavDark = () => {
       </div>
 
       <div>
-        <p onClick={handleClickAddTask} className="plus__btn bg--purple">+</p>
+        <p onClick={handleClickAddTask} className="plus__btn bg--purple">
+          +
+        </p>
         <button>
           <img src="/assets/icon-vertical-ellipsis.svg" />
         </button>
@@ -68,49 +72,8 @@ const NavDark = () => {
         </div>
       </div>
 
-      <div id="form__modal" className="form__modal" onClick={closeModal}>
-        <form className="form__modal-content bg--dark-grey">
-          <h1>Add New Task</h1>
-          <label>
-            Title
-            <input type="text" />
-          </label>
-
-          <label>
-            Description
-            <textarea type="text" />
-          </label>
-
-          <label>
-            Subtasks
-            <div className="subtask">
-              <input type="text" />
-              <img src="/assets/icon-cross.svg" />
-            </div>
-            <div className="subtask">
-              <input type="text" />
-              <img src="/assets/icon-cross.svg" />
-            </div>
-            <div id="add-task__button" className="btn-container">
-              <button className="btn bg--white text--main">
-                + Add New Subtask
-              </button>
-            </div>
-          </label>
-
-          <label>
-            Status
-            <select>
-              <option>Todo</option>
-            </select>
-            <div id="add-task__button--bottom" className="btn-container">
-              <button className="btn bg--purple text--white">
-                + Add New Subtask
-              </button>
-            </div>
-          </label>
-        </form>
-      </div>
+      <AddForm closeModal={closeModal} />
+      <EditForm closeModal={closeModal} />
     </nav>
   );
 };

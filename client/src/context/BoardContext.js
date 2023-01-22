@@ -12,6 +12,9 @@ const BoardContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
+
+  console.log(data)
+
   const fetchData = async () => {
     const boardsResponse = await fetchBoards();
     const currentBoard = boardsResponse.data[0];
@@ -59,7 +62,7 @@ const BoardContextProvider = ({ children }) => {
     if (modal.id === "boards__modal") {
       arrow.style.transform = "rotate(180deg)";
       modal.style.transform = "translate(0,0)";
-    } else if (modal.id === "form__modal") {
+    } else if (modal.id === "form__modal--add" || modal.id === "form__modal--edit") {
       modal.style.transform = "scale(100%)";
     }
 
@@ -76,7 +79,7 @@ const BoardContextProvider = ({ children }) => {
     if (data.modal.id === "boards__modal") {
       document.getElementById("icon-arrow").style.transform = "rotate(0deg)";
       data.modal.style.transform = "translateX(-150%)";
-    } else if (data.modal.id === "form__modal") {
+    } else if (data.modal.id === "form__modal--add" || data.modal.id === "form__modal--edit") {
       data.modal.style.transform = "scale(0)";
     }
     overlay.style.display = "none";

@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { fetchTasks } from "../../../actions/tasks";
 import "../partials.css";
 
-const Column = ({ column }) => {
+const Column = ({ column, openModal }) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     fetchTasks(column._id).then((res) => setTasks(res.data));
   }, []);
 
+  console.log(tasks);
   return (
     <section className="column">
       <div className="column__header">
@@ -16,10 +17,14 @@ const Column = ({ column }) => {
         <h1 className="text--medium">TODO (4)</h1>
       </div>
 
-      {tasks.map((task) => (
-        <div key={task._id} className="column__card bg--dark-grey">
+      {tasks?.map((task) => (
+        <div key={task._id} className="column__card bg--dark-grey" onClick={() => openModal("form__modal--edit")}>
           <h2>{task.title}</h2>
-          <h3 className="text--medium">0 of 3 subtasks</h3>
+          <h3 className="text--medium">
+            {task.subtasks.filter((subtask) => subtask.isCompleted).length} of{" "}
+            {task.subtasks.length + " "}
+            subtasks
+          </h3>
         </div>
       ))}
     </section>

@@ -157,7 +157,7 @@
 } */
 
 /* FORM MODAL */
-#form__modal {
+#form__modal--edit, #form__modal--add {
   transform: scale(0);
   z-index: 2;
   transition: transform 0.2s ease-out;
