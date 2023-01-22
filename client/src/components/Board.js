@@ -11,10 +11,11 @@ const Home = () => {
 
   return (
     <div className="home">
+      <Overlay />
       {columns?.map((column) => (
         <Column key={column._id} column={column} />
       ))}
-      <Overlay />
+      {/* <Overlay /> */}
     </div>
   );
 };

@@ -50,17 +50,28 @@ const BoardContextProvider = ({ children }) => {
     const overlay = document.getElementById("overlay");
 
     if (modal === data.modal) {
-      closeModal()
-      return
+      closeModal();
+      return;
     }
 
-    switch (id) {
-      case "boards__modal":
-        arrow.style.transform = "rotate(180deg)";
+    if (modal.id === "boards__modal") {
+      arrow.style.transform = "rotate(180deg)";
+      modal.style.transform = "translate(0,0)";
+    } else if (modal.id === "form__modal") {
+      modal.style.transform = "scale(100%)";
     }
+    // switch (modal.id) {
+    //   case "boards__modal":
+    //     arrow.style.transform = "rotate(180deg)";
+    //     // modal.classList.add("modal-active");
+    //     // modal.style.transform = "translate(0,0)"
+    //     // transform: translate(0, 0);
+    //   case modal.id === "form__modal":
+    //     console.log(modal)
+    //     modal.style.transform = "scale(100%)";
+    // }
 
     // modal.style.transform = "translate(-50%, 0)";
-    modal.classList.add("modal-active")
     overlay.style.display = "block";
     setData({
       ...data,
@@ -71,10 +82,11 @@ const BoardContextProvider = ({ children }) => {
   const closeModal = () => {
     const overlay = document.getElementById("overlay");
     if (data.modal.id === "boards__modal") {
-      document.getElementById("icon-arrow").style.transform = "rotate(0deg)";
+        document.getElementById("icon-arrow").style.transform = "rotate(0deg)";
+        data.modal.style.transform = "translateX(-150%)";
+    } else if (data.modal.id === "form__modal") {
+       data.modal.style.transform = "scale(0)";
     }
-    // data.modal.style.transform = "translate(-50%, 200%)";
-    data.modal.classList.remove("modal-active");
     overlay.style.display = "none";
     setData({
       ...data,
