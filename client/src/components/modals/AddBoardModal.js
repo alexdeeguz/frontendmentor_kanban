@@ -1,20 +1,15 @@
-const EditForm = ({ closeModal }) => {
+const AddBoardModal = ({ closeModal }) => {
   return (
-    <div id="form__modal--edit" className="form__modal" onClick={closeModal}>
+    <div id="board__modal--add" className="form__modal" onClick={closeModal}>
       <form className="form__modal-content bg--dark-grey">
-        <h1>Edit Task</h1>
+        <h1>Add New Board</h1>
         <label>
-          Title
+          Board Name
           <input type="text" />
         </label>
 
         <label>
-          Description
-          <textarea type="text" />
-        </label>
-
-        <label>
-          Subtasks
+          Board Columns
           <div className="subtask">
             <input type="text" />
             <img src="/assets/icon-cross.svg" />
@@ -25,25 +20,18 @@ const EditForm = ({ closeModal }) => {
           </div>
           <div id="add-task__button" className="btn-container">
             <button className="btn bg--white text--main">
-              + Add New Subtask
+              + Add New Column
             </button>
           </div>
         </label>
 
-        <label>
-          Status
-          <select>
-            <option>Todo</option>
-          </select>
+
           <div id="add-task__button--bottom" className="btn-container">
-            <button className="btn bg--purple text--white">
-              Save Changes
-            </button>
+            <button className="btn bg--purple text--white">Create New Board</button>
           </div>
-        </label>
       </form>
     </div>
   );
 };
 
-export default EditForm;
+export default AddBoardModal;

@@ -1,4 +1,4 @@
-const AddForm = ({ closeModal }) => {
+const AddFormModal = ({ closeModal }) => {
     return (
       <div id="form__modal--add" className="form__modal" onClick={closeModal}>
         <form className="form__modal-content bg--dark-grey">
@@ -46,4 +46,4 @@ const AddForm = ({ closeModal }) => {
     );
 }
 
-export default AddForm
+export default AddFormModal

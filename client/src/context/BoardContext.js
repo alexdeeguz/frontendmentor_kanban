@@ -12,9 +12,6 @@ const BoardContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
-
-  console.log(data)
-
   const fetchData = async () => {
     const boardsResponse = await fetchBoards();
     const currentBoard = boardsResponse.data[0];
@@ -56,13 +53,19 @@ const BoardContextProvider = ({ children }) => {
       closeModal();
       return;
     } else if (data.modal && modal !== data.modal) {
-      closeModal()
+      closeModal();
     }
 
     if (modal.id === "boards__modal") {
       arrow.style.transform = "rotate(180deg)";
       modal.style.transform = "translate(0,0)";
-    } else if (modal.id === "form__modal--add" || modal.id === "form__modal--edit") {
+    } else if (
+      modal.id === "form__modal--add" ||
+      modal.id === "form__modal--edit" ||
+      modal.id === "board__modal--add" ||
+      modal.id === "board__modal--edit" || 
+      modal.id === "delete__modal"
+    ) {
       modal.style.transform = "scale(100%)";
     }
 
@@ -79,7 +82,13 @@ const BoardContextProvider = ({ children }) => {
     if (data.modal.id === "boards__modal") {
       document.getElementById("icon-arrow").style.transform = "rotate(0deg)";
       data.modal.style.transform = "translateX(-150%)";
-    } else if (data.modal.id === "form__modal--add" || data.modal.id === "form__modal--edit") {
+    } else if (
+      data.modal.id === "form__modal--add" ||
+      data.modal.id === "form__modal--edit" ||
+      data.modal.id === "board__modal--add" ||
+      data.modal.id === "board__modal--edit" ||
+      data.modal.id === "delete__modal"
+    ) {
       data.modal.style.transform = "scale(0)";
     }
     overlay.style.display = "none";

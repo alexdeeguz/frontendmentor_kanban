@@ -9,7 +9,6 @@ const Column = ({ column, openModal }) => {
     fetchTasks(column._id).then((res) => setTasks(res.data));
   }, []);
 
-  console.log(tasks);
   return (
     <section className="column">
       <div className="column__header">

@@ -1,8 +1,12 @@
 import { useContext } from "react";
-import AddForm from "../modals/AddForm";
 import { BoardContext } from "../../context/BoardContext";
+import EditFormModal from "../modals/EditFormModal";
+import BoardsModal from "../modals/BoardsModal";
+import AddFormModal from "../modals/AddFormModal";
 import "./nav.css";
-import EditForm from "../modals/EditForm";
+import AddBoardModal from "../modals/AddBoardModal";
+import EditBoardModal from "../modals/EditBoardModal";
+import DeleteModal from "../modals/DeleteModal";
 
 const NavDark = () => {
   const {
@@ -18,6 +22,15 @@ const NavDark = () => {
   const handleClickAddTask = () => {
     openModal("form__modal--add");
   };
+
+  const handleClickEllipses = () => {
+    let element = document.getElementById("ellipses__options");
+    if (element.classList.contains("hidden")) {
+      element.classList.remove("hidden");
+    } else {
+      element.classList.add("hidden");
+    }
+  };
   return (
     <nav className="nav bg--dark-grey">
       <div>
@@ -30,50 +43,38 @@ const NavDark = () => {
         </div>
       </div>
 
-      <div>
+      <div className="header__right">
         <p onClick={handleClickAddTask} className="plus__btn bg--purple">
           +
         </p>
-        <button>
+        <button onClick={handleClickEllipses}>
           <img src="/assets/icon-vertical-ellipsis.svg" />
         </button>
-      </div>
 
-      <div id="boards__modal" className="boards__modal">
-        <div className="boards__modal-content">
-          <h1 className="text--medium">ALL BOARDS</h1>
-          {boards?.map((board) => (
-            <div
-              key={board._id}
-              className={`boards__modal--list-item text--medium ${
-                selectedBoard === board._id && "selected bg--purple"
-              }`}
-            >
-              {selectedBoard === board._id ? (
-                <img src="/assets/icon-board-white.svg" alt="board icon" />
-              ) : (
-                <img src="/assets/icon-board.svg" alt="board icon" />
-              )}
-              <h2>{board.name}</h2>
-            </div>
-          ))}
-          <div className="boards__modal--list-item text--main">
-            <img src="/assets/icon-board-purple.svg" alt="board-icon" />
-            <h2>+ Create New Board</h2>
-          </div>
-
-          <div className="toggle-theme__container bg--dark">
-            <img src="/assets/icon-light-theme.svg" alt="light theme" />
-            <div className="switch bg--purple">
-              <div></div>
-            </div>
-            <img src="/assets/icon-dark-theme.svg" alt="dark theme" />
-          </div>
+        <div
+          id="ellipses__options"
+          className="ellipses__options bg--dark hidden"
+        >
+          <p
+            className="text--medium"
+            onClick={() => openModal("board__modal--edit")}
+          >
+            Edit Board
+          </p>
+          <p className="text--red" onClick={() => openModal("delete__modal")}>Delete Board</p>
         </div>
       </div>
 
-      <AddForm closeModal={closeModal} />
-      <EditForm closeModal={closeModal} />
+      <BoardsModal
+        selectedBoard={selectedBoard}
+        boards={boards}
+        openModal={openModal}
+      />
+      <AddFormModal closeModal={closeModal} />
+      <EditFormModal closeModal={closeModal} />
+      <AddBoardModal closeModal={closeModal} />
+      <EditBoardModal closeModal={closeModal} />
+      <DeleteModal closeModal={closeModal} />
     </nav>
   );
 };

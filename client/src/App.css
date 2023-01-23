@@ -13,11 +13,15 @@
 
 /* main purple */
 .bg--purple {
-  background: #635FC7;
+  background: #635fc7;
 }
 
 .bg--white {
   background: #ffffff;
+}
+
+.bg--red {
+  background: #EA5555;
 }
 
 .text--white {
@@ -25,11 +29,15 @@
 }
 
 .text--medium {
-  color: #828FA3;
+  color: #828fa3;
 }
 
 .text--main {
-  color: #635FC7;
+  color: #635fc7;
+}
+
+.text--red {
+  color: #ea5555;
 }
 
 body {
@@ -66,7 +74,9 @@ body {
 }
 
 .btn {
-  padding: 8px 85px;
+  /* padding: 8px 85px; */
+  padding-top: 8px;
+  padding-bottom: 8px;
   border: none;
   border-radius: 20px;
   width: 100%;

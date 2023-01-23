@@ -51,6 +51,28 @@
   /* opacity: ; */
 }
 
+.header__right {
+  /* border: 1px solid red; */
+  position: relative;
+}
+
+.ellipses__options {
+  position: absolute;
+  top: 50px;
+  left: -50px;
+  z-index: 1;
+  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+  border-radius: 8px;
+}
+
+.ellipses__options > p {
+  padding: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
 /* BOARDS MODAL  */
 
 .boards__modal {
@@ -157,7 +179,11 @@
 } */
 
 /* FORM MODAL */
-#form__modal--edit, #form__modal--add {
+#form__modal--edit,
+#form__modal--add,
+#board__modal--add,
+#board__modal--edit,
+#delete__modal {
   transform: scale(0);
   z-index: 2;
   transition: transform 0.2s ease-out;
@@ -184,11 +210,14 @@
 }
 
 .form__modal-content input,
-.form__modal-content label, .form__modal-content textarea {
+.form__modal-content label,
+.form__modal-content textarea {
   display: block;
 }
 
-.form__modal-content input, .form__modal-content textarea, select {
+.form__modal-content input,
+.form__modal-content textarea,
+select {
   background: none;
   border: 1px solid rgba(130, 143, 163, 0.25);
   border-radius: 4px;
@@ -211,6 +240,15 @@ label {
   object-fit: contain;
 }
 
+/* DELETE */
+#delete__modal > div > h1, #delete__modal > div > p {
+  margin-bottom: 24px;
+}
+
+ #delete__modal > div > div {
+  margin-bottom: 16px;
+ }
+
 @media screen and (min-width: 768px) {
   #boards__modal {
     width: 264px;
@@ -224,6 +262,3 @@ label {
     margin-right: 200px;
   }
 }
-
-
-
