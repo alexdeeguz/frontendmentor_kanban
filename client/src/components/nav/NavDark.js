@@ -47,9 +47,9 @@ const NavDark = () => {
         <p onClick={handleClickAddTask} className="plus__btn bg--purple">
           +
         </p>
-        <button onClick={handleClickEllipses}>
+        <div className="icon__ellipses" onClick={handleClickEllipses}>
           <img src="/assets/icon-vertical-ellipsis.svg" />
-        </button>
+        </div>
 
         <div
           id="ellipses__options"

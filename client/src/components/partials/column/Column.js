@@ -13,7 +13,7 @@ const Column = ({ column, openModal }) => {
     <section className="column">
       <div className="column__header">
         <div className="dot"></div>
-        <h1 className="text--medium">TODO (4)</h1>
+        <h1 className="text--medium">{column.name.toUpperCase()} ({tasks.length})</h1>
       </div>
 
       {tasks?.map((task) => (

@@ -46,6 +46,10 @@ body {
 }
 
 .home {
+  width: 100vw;
+    overflow-x: scroll;
+}
+.home > div  {
   display: flex;
   width: min-content;
   position: relative;

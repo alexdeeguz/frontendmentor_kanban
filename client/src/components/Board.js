@@ -12,11 +12,13 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Overlay />
-      {columns?.map((column) => (
-        <Column key={column._id} column={column} openModal={openModal}/>
-      ))}
-      {/* <Overlay /> */}
+      <div>
+        <Overlay />
+        {columns?.map((column) => (
+          <Column key={column._id} column={column} openModal={openModal} />
+        ))}
+        {/* <Overlay /> */}
+      </div>
     </div>
   );
 };
