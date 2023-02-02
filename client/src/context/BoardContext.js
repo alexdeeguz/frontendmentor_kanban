@@ -40,7 +40,8 @@ const BoardContextProvider = ({ children }) => {
   const selectBoard = (id) => {
     localStorage.setItem("board", id);
     fetchColumns(id).then((res) => {
-      setData({ ...data, columns: res.data });
+      closeModal();
+      setData({ ...data, columns: res.data, selectedBoard: id, modalOpen: false });
     });
   };
 
@@ -49,11 +50,9 @@ const BoardContextProvider = ({ children }) => {
     let arrow = document.getElementById("icon-arrow");
     const overlay = document.getElementById("overlay");
 
-    if (modal === data.modal) {
-      closeModal();
-      return;
-    } else if (data.modal && modal !== data.modal) {
-      closeModal();
+    if (data.modalOpen) {
+      closeModal()
+      return
     }
 
     if (modal.id === "boards__modal") {
@@ -63,7 +62,7 @@ const BoardContextProvider = ({ children }) => {
       modal.id === "form__modal--add" ||
       modal.id === "form__modal--edit" ||
       modal.id === "board__modal--add" ||
-      modal.id === "board__modal--edit" || 
+      modal.id === "board__modal--edit" ||
       modal.id === "delete__modal"
     ) {
       modal.style.transform = "scale(100%)";
@@ -73,6 +72,7 @@ const BoardContextProvider = ({ children }) => {
     setData({
       ...data,
       modal,
+      modalOpen: true
     });
   };
 
@@ -95,6 +95,7 @@ const BoardContextProvider = ({ children }) => {
     setData({
       ...data,
       modal: null,
+      modalOpen: false
     });
   };
 

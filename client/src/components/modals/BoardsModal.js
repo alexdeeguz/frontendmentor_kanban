@@ -1,4 +1,4 @@
-const BoardsModal = ({ selectedBoard, boards, openModal }) => {
+const BoardsModal = ({ selectedBoard, boards, openModal, selectBoard }) => {
   return (
     <div id="boards__modal" className="boards__modal">
       <div className="boards__modal-content">
@@ -9,6 +9,7 @@ const BoardsModal = ({ selectedBoard, boards, openModal }) => {
             className={`boards__modal--list-item text--medium ${
               selectedBoard === board._id && "selected bg--purple"
             }`}
+            onClick={() => selectBoard(board._id)}
           >
             {selectedBoard === board._id ? (
               <img src="/assets/icon-board-white.svg" alt="board icon" />
@@ -18,7 +19,10 @@ const BoardsModal = ({ selectedBoard, boards, openModal }) => {
             <h2>{board.name}</h2>
           </div>
         ))}
-        <div className="boards__modal--list-item text--main" onClick={() => openModal("board__modal--add")}>
+        <div
+          className="boards__modal--list-item text--main"
+          onClick={() => openModal("board__modal--add")}
+        >
           <img src="/assets/icon-board-purple.svg" alt="board-icon" />
           <h2>+ Create New Board</h2>
         </div>

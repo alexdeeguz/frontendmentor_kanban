@@ -12,14 +12,17 @@ const NavDark = () => {
   const {
     openModal,
     closeModal,
+    selectBoard,
     data: { boards, selectedBoard },
   } = useContext(BoardContext);
 
-  const handleClickTitle = () => {
+  const handleClickTitle = (e) => {
+    e.preventDefault();
     openModal("boards__modal");
   };
 
-  const handleClickAddTask = () => {
+  const handleClickAddTask = (e) => {
+    e.preventDefault();
     openModal("form__modal--add");
   };
 
@@ -69,6 +72,7 @@ const NavDark = () => {
         selectedBoard={selectedBoard}
         boards={boards}
         openModal={openModal}
+        selectBoard={selectBoard}
       />
       <AddFormModal closeModal={closeModal} />
       <EditFormModal closeModal={closeModal} />

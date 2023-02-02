@@ -58,6 +58,7 @@
 
 .header__right > .icon__ellipses {
   padding: 8px 16px;
+  margin-right: 16px;
 }
 
 .ellipses__options {
