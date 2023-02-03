@@ -43,10 +43,11 @@
 body {
   background: #20212c;
   height: 100%;
+  width: 100%;
 }
 
 .home {
-  width: 100vw;
+  /* width: 100vw; */
     /* overflow-x: scroll; */
 }
 .home > div  {
@@ -64,7 +65,7 @@ body {
 }
 
 #overlay {
-  width: 100vw;
+  width: 100vw !important;
   /* height: calc(100vh - 64px); */
   height: 110vh;
   position: absolute;

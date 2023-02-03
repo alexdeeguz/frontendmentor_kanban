@@ -1,6 +1,6 @@
-const EditFormModal = ({ closeModal }) => {
+const EditFormModal = () => {
   return (
-    <div id="form__modal--edit" className="form__modal" onClick={closeModal}>
+    <div id="form__modal--edit" className="form__modal">
       <form className="form__modal-content bg--dark-grey">
         <h1>Edit Task</h1>
         <label>

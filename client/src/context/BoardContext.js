@@ -46,6 +46,7 @@ const BoardContextProvider = ({ children }) => {
   };
 
   const openModal = (id) => {
+    console.log(id)
     let modal = document.getElementById(id);
     let arrow = document.getElementById("icon-arrow");
     const overlay = document.getElementById("overlay");
@@ -63,9 +64,11 @@ const BoardContextProvider = ({ children }) => {
       modal.id === "form__modal--edit" ||
       modal.id === "board__modal--add" ||
       modal.id === "board__modal--edit" ||
+      modal.id === "form__modal--view" ||
       modal.id === "delete__modal"
     ) {
       modal.style.transform = "scale(100%)";
+      modal.style.transform += "translateX(-50%)";
     }
 
     overlay.style.display = "block";
@@ -87,6 +90,7 @@ const BoardContextProvider = ({ children }) => {
       data.modal.id === "form__modal--edit" ||
       data.modal.id === "board__modal--add" ||
       data.modal.id === "board__modal--edit" ||
+      data.modal.id === "form__modal--view" ||
       data.modal.id === "delete__modal"
     ) {
       data.modal.style.transform = "scale(0)";

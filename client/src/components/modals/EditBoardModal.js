@@ -1,6 +1,6 @@
-const EditBoardModal = ({ closeModal }) => {
+const EditBoardModal = () => {
   return (
-    <div id="board__modal--edit" className="form__modal" onClick={closeModal}>
+    <div id="board__modal--edit" className="form__modal">
       <form className="form__modal-content bg--dark-grey">
         <h1>Edit Board</h1>
         <label>

@@ -1,13 +1,13 @@
 .nav {
-  width: 100vw;
-  /* width: 100%; */
-  height: 64px;
+  /* width: 100vw; */
+  width: 100%;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0px 16px 16px;
-  font-size: 12px;
-  /* border: 1px solid red; */
+  padding: 1rem 0rem 1rem 1rem;
+  font-size: .75rem;
+  /* border: .0625rem solid red; */
 }
 
 .nav > div {
@@ -16,13 +16,13 @@
 }
 
 .nav .logo {
-  margin-right: 16px;
+  margin-right: 1rem;
 }
 
 .nav .logo__title {
   font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
+  font-size: 1.125rem;
+  line-height: 1.4375rem;
 }
 
 .nav > div > button,
@@ -33,18 +33,18 @@
 
 .nav > div > button > img,
 .nav > div > div > button > img {
-  margin-left: 16px;
+  margin-left: 1rem;
 }
 
 .nav > div > .plus__btn {
   background: #635fc7;
-  border-radius: 24px;
-  width: 48px;
-  height: 32px;
+  border-radius: 1.5rem;
+  width: 3rem;
+  height: 2rem;
   mix-blend-mode: normal;
   /* opacity: 0.25; */
   color: #ffffff;
-  font-size: 15px;
+  font-size: .9375rem;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -57,22 +57,22 @@
 }
 
 .header__right > .icon__ellipses {
-  padding: 8px 16px;
-  margin-right: 16px;
+  padding: .5rem 1rem;
+  margin-right: 1rem;
 }
 
 .ellipses__options {
   position: absolute;
-  top: 50px;
-  left: -35px;
+  top: 3.125rem;
+  left: -2.1875rem;
   z-index: 1;
-  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
-  border-radius: 8px;
-  padding-right: 10px;
+  box-shadow: 0rem .625rem 1.25rem rgba(54, 78, 126, 0.25);
+  border-radius: .5rem;
+  padding-right: .625rem;
 }
 
 .ellipses__options > p {
-  padding: 16px;
+  padding: 1rem;
 }
 
 .hidden {
@@ -82,24 +82,24 @@
 /* BOARDS MODAL  */
 
 .boards__modal {
-  /* width: 264px; */
+  /* width: 16.5rem; */
   width: 100%;
-  height: 322px;
+  height: 20.125rem;
   position: absolute;
-  top: 62px;
-  /* left: 54px; */
+  top: 3.875rem;
+  /* left: 3.375rem; */
   left: 0;
   z-index: 2;
   background: #2b2c37;
-  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
-  border-radius: 8px;
-  /* margin-right: 52px; */
+  box-shadow: 0rem .625rem 1.25rem rgba(54, 78, 126, 0.25);
+  border-radius: .5rem;
+  /* margin-right: 3.25rem; */
   /* display: none; */
   /* transform: translateY(200%); */
   /* transform: translate(-50%, 200%); */
   transform: translateX(-150%);
   transition: transform 0.3s ease-out;
-  /* border: 1px solid red; */
+  /* border: .0625rem solid red; */
 }
 
 .boards__modal-content {
@@ -114,62 +114,62 @@
 
 .boards__modal-content h1 {
   font-weight: 700;
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 2.4px;
-  margin-top: 16px;
-  margin-left: 24px;
-  margin-bottom: 19px;
+  font-size: .75rem;
+  line-height: .9375rem;
+  letter-spacing: .15rem;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  margin-bottom: 1.1875rem;
 }
 
 .boards__modal--list-item {
   display: flex;
   align-items: center;
-  padding-left: 24px;
-  /* border: 1px solid red; */
-  margin-right: 24px;
-  border-radius: 0px 100px 100px 0px;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-left: 1.5rem;
+  /* border: .0625rem solid red; */
+  margin-right: 1.5rem;
+  border-radius: 0rem 6.25rem 6.25rem 0rem;
+  padding-top: .875rem;
+  padding-bottom: .875rem;
 }
 
 .boards__modal--list-item > img {
-  margin-right: 12px;
+  margin-right: .75rem;
 }
 
 .boards__modal--list-item > h2 {
   font-weight: 700;
-  font-size: 15px;
-  line-height: 19px;
+  font-size: .9375rem;
+  line-height: 1.1875rem;
 }
 
 .toggle-theme__container {
   display: flex;
   justify-content: space-around;
-  margin-top: 16px;
-  margin-left: 16px;
-  margin-right: 16px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  border-radius: 6px;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: .875rem;
+  padding-bottom: .875rem;
+  border-radius: .375rem;
 }
 
 .toggle-theme__container > div {
-  /* border: 1px solid red; */
-  width: 40px;
-  border-radius: 12px;
+  /* border: .0625rem solid red; */
+  width: 2.5rem;
+  border-radius: .75rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
 .toggle-theme__container > div > div {
-  width: 14px;
-  height: 14px;
+  width: .875rem;
+  height: .875rem;
   border-radius: 100%;
   background-color: #ffffff;
-  margin-right: 3px;
-  margin-left: 3px;
+  margin-right: .1875rem;
+  margin-left: .1875rem;
 }
 
 #icon-arrow {
@@ -189,30 +189,35 @@
 #form__modal--add,
 #board__modal--add,
 #board__modal--edit,
+#form__modal--view,
 #delete__modal {
   transform: scale(0);
   z-index: 2;
   transition: transform 0.2s ease-out;
+  max-width: 480px;
+  width: 90%;
 }
 
 .form__modal {
-  /* border: 1px solid red; */
+  /* border: .0625rem solid red; */
   position: absolute;
-  top: 100px;
-  left: 0;
+  top: 6.25rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
   color: #ffffff;
-  width: 100%;
+  /* width: 100%; */
+  /* border: .0625rem solid red; */
   /* height: 100%; */
   /* overflow: scroll; */
 }
 
 .form__modal-content {
   width: 100%;
-  margin-left: 30px;
-  margin-right: 30px;
-  padding: 24px;
-  border-radius: 6px;
+  /* margin-left: 1.875rem; */
+  /* margin-right: 1.875rem; */
+  padding: 1.5rem;
+  border-radius: .375rem;
 }
 
 .form__modal-content input,
@@ -225,16 +230,16 @@
 .form__modal-content textarea,
 select {
   background: none;
-  border: 1px solid rgba(130, 143, 163, 0.25);
-  border-radius: 4px;
+  border: .0625rem solid rgba(130, 143, 163, 0.25);
+  border-radius: .25rem;
   width: 100%;
-  padding: 8px 16px;
+  padding: .5rem 1rem;
   color: #ffffff;
-  margin-top: 8px;
+  margin-top: .5rem;
 }
 
 label {
-  margin-top: 24px;
+  margin-top: 1.5rem;
 }
 
 .subtask {
@@ -242,29 +247,39 @@ label {
 }
 
 .subtask > img {
-  margin-left: 16px;
+  margin-left: 1rem;
   object-fit: contain;
 }
 
 /* DELETE */
-#delete__modal > div > h1, #delete__modal > div > p {
-  margin-bottom: 24px;
+#delete__modal > div > h1,
+#delete__modal > div > p {
+  margin-bottom: 1.5rem;
 }
 
- #delete__modal > div > div {
-  margin-bottom: 16px;
- }
+#delete__modal > div > div {
+  margin-bottom: 1rem;
+}
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48rem) {
   #boards__modal {
-    width: 264px;
+    width: 16.5rem;
     height: 100%;
-    width: 261px;
+    width: 16.3125rem;
     left: 0;
   }
 
+  /* #form__modal--edit,
+  #form__modal--add,
+  #board__modal--add,
+  #board__modal--edit,
+  #form__modal--view,
+  #delete__modal {
+    width: 30rem;
+  } */
+
   .form__modal-content {
-    margin-left: 200px;
-    margin-right: 200px;
+    /* margin-left: 12.5rem; */
+    /* margin-right: 12.5rem; */
   }
 }

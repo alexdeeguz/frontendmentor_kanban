@@ -7,6 +7,7 @@ import "./nav.css";
 import AddBoardModal from "../modals/AddBoardModal";
 import EditBoardModal from "../modals/EditBoardModal";
 import DeleteModal from "../modals/DeleteModal";
+import ViewTaskModal from "../modals/ViewTask";
 
 const NavDark = () => {
   const {
@@ -79,6 +80,7 @@ const NavDark = () => {
       <AddBoardModal closeModal={closeModal} />
       <EditBoardModal closeModal={closeModal} />
       <DeleteModal closeModal={closeModal} />
+      <ViewTaskModal closeModal={closeModal} />
     </nav>
   );
 };

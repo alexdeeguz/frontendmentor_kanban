@@ -17,7 +17,7 @@ const Column = ({ column, openModal }) => {
       </div>
 
       {tasks?.map((task) => (
-        <div key={task._id} className="column__card bg--dark-grey" onClick={() => openModal("form__modal--edit")}>
+        <div key={task._id} className="column__card bg--dark-grey" onClick={() => openModal("form__modal--view")}>
           <h2>{task.title}</h2>
           <h3 className="text--medium">
             {task.subtasks.filter((subtask) => subtask.isCompleted).length} of{" "}
