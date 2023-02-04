@@ -45,8 +45,15 @@ const BoardContextProvider = ({ children }) => {
     });
   };
 
-  const openModal = (id) => {
-    console.log(id)
+  const selectTask = (task) => {
+    setData({
+      ...data,
+      task: task
+    })
+    openModal("form__modal--view", task);
+  }
+
+  const openModal = (id, otherData = null) => {
     let modal = document.getElementById(id);
     let arrow = document.getElementById("icon-arrow");
     const overlay = document.getElementById("overlay");
@@ -75,7 +82,8 @@ const BoardContextProvider = ({ children }) => {
     setData({
       ...data,
       modal,
-      modalOpen: true
+      modalOpen: true,
+      otherData
     });
   };
 
@@ -105,7 +113,7 @@ const BoardContextProvider = ({ children }) => {
 
   return (
     <BoardContext.Provider
-      value={{ closeModal, openModal, selectBoard, data, loading }}
+      value={{ closeModal, openModal, selectBoard, data, loading, selectTask, setData }}
     >
       {children}
     </BoardContext.Provider>

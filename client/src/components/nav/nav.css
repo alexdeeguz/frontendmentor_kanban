@@ -268,18 +268,29 @@ label {
     width: 16.3125rem;
     left: 0;
   }
-
-  /* #form__modal--edit,
-  #form__modal--add,
-  #board__modal--add,
-  #board__modal--edit,
-  #form__modal--view,
-  #delete__modal {
-    width: 30rem;
-  } */
-
-  .form__modal-content {
-    /* margin-left: 12.5rem; */
-    /* margin-right: 12.5rem; */
-  }
 }
+
+.subtask-checkbox {
+  display: flex;
+  align-items: center;
+  padding: 13px 8px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.subtask-checkbox input[type="checkbox"] {
+  accent-color: #635FC7;
+
+} 
+
+input[type="checkbox"] {
+  width: auto;
+  margin-top: 0;
+  margin-right: 10px;
+}
+
+[data-completed=true] {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+

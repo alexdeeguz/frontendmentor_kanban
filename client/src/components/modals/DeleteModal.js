@@ -1,7 +1,7 @@
 const DeleteModal = ({ closeModal }) => {
 
   const handleClickDelete = () => {
-    console.log('delete')
+    // console.log('delete')
   };
 
   return (

@@ -9,6 +9,7 @@ const Home = () => {
     data: { columns },
     openModal,
     closeModal,
+    selectTask
   } = useContext(BoardContext);
 
   return (
@@ -16,7 +17,7 @@ const Home = () => {
       <div>
         <Overlay closeModal={closeModal}/>
         {columns?.map((column) => (
-          <Column key={column._id} column={column} openModal={openModal} />
+          <Column key={column._id} column={column} openModal={openModal} selectTask={selectTask}/>
         ))}
         {/* <Overlay /> */}
       </div>

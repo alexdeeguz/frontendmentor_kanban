@@ -14,7 +14,8 @@ const NavDark = () => {
     openModal,
     closeModal,
     selectBoard,
-    data: { boards, selectedBoard },
+    setData,
+    data: { boards, selectedBoard, otherData, columns },
   } = useContext(BoardContext);
 
   const handleClickTitle = (e) => {
@@ -80,7 +81,7 @@ const NavDark = () => {
       <AddBoardModal closeModal={closeModal} />
       <EditBoardModal closeModal={closeModal} />
       <DeleteModal closeModal={closeModal} />
-      <ViewTaskModal closeModal={closeModal} />
+      <ViewTaskModal closeModal={closeModal} task={otherData} columns={columns}/>
     </nav>
   );
 };
