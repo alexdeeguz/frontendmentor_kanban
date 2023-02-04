@@ -6,7 +6,7 @@ import Column from "./partials/column/Column";
 
 const Home = () => {
   const {
-    data: { columns },
+    data,
     openModal,
     closeModal,
     selectTask
@@ -16,8 +16,8 @@ const Home = () => {
     <div className="home">
       <div>
         <Overlay closeModal={closeModal}/>
-        {columns?.map((column) => (
-          <Column key={column._id} column={column} openModal={openModal} selectTask={selectTask}/>
+        {data.columns?.map((column) => (
+          <Column key={column._id} column={column} openModal={openModal} selectTask={selectTask} data={data}/>
         ))}
         {/* <Overlay /> */}
       </div>

@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
+import { updateTask } from "../../actions/tasks";
 
-const ViewTaskModal = ({ task, columns }) => {
+const ViewTaskModal = ({ task, columns, fetchData }) => {
   let completedTasks = task?.subtasks.filter((task) => task.isCompleted).length;
   const [updatedTask, setUpdatedTask] = useState(task);
 
   useEffect(() => {
     setUpdatedTask(task);
-  }, [task]);
+  }, [task, columns]);
 
   const handleClickSave = (e) => {
     e.preventDefault();
-
-    console.log(updatedTask);
+    
+    updateTask(updatedTask._id, updatedTask)
+      .then(() => fetchData())
   };
 
   const handleUpdate = (id) => {

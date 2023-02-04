@@ -25,4 +25,16 @@ router.get("/:columnId", async (req, res) => {
   }
 });
 
+router.put("/:taskId", async (req, res) => {
+  const { title, description, status, subtasks } = req.body
+  const id = req.params.taskId
+  try {
+    await Task.findByIdAndUpdate(id, { title, description, status, subtasks })
+    res.send()
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: "Server error"})
+  }
+})
+
 module.exports = router;

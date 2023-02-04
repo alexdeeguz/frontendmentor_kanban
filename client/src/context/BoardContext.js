@@ -38,6 +38,7 @@ const BoardContextProvider = ({ children }) => {
         columns: columnsResponse.data,
       });
     }
+    closeModal()
     setLoading(false);
   };
 
@@ -97,6 +98,7 @@ const BoardContextProvider = ({ children }) => {
   };
 
   const closeModal = () => {
+    if (data.modal === undefined) return
     const overlay = document.getElementById("overlay");
 
     if (data.modal.id === "boards__modal") {
@@ -130,6 +132,7 @@ const BoardContextProvider = ({ children }) => {
         loading,
         selectTask,
         setData,
+        fetchData
       }}
     >
       {children}

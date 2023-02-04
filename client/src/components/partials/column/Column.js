@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { fetchTasks } from "../../../actions/tasks";
 import "../partials.css";
 
-const Column = ({ column, openModal, selectTask }) => {
+const Column = ({ data, column, selectTask }) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     fetchTasks(column._id).then((res) => setTasks(res.data));
-  }, []);
+  }, [data]);
 
   return (
     <section className="column">
