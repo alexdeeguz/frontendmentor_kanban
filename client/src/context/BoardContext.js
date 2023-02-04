@@ -15,9 +15,13 @@ const BoardContextProvider = ({ children }) => {
   const fetchData = async () => {
     const boardsResponse = await fetchBoards();
     const currentBoard = boardsResponse.data[0];
-    const columnsResponse = await fetchColumns(currentBoard._id);
 
     const board = localStorage.getItem("board");
+    const columnsResponse =
+      board === null
+        ? await fetchColumns(currentBoard._id)
+        : await fetchColumns(board);
+
     if (board === null) {
       localStorage.setItem("board", currentBoard._id);
       setData({
@@ -41,17 +45,22 @@ const BoardContextProvider = ({ children }) => {
     localStorage.setItem("board", id);
     fetchColumns(id).then((res) => {
       closeModal();
-      setData({ ...data, columns: res.data, selectedBoard: id, modalOpen: false });
+      setData({
+        ...data,
+        columns: res.data,
+        selectedBoard: id,
+        modalOpen: false,
+      });
     });
   };
 
   const selectTask = (task) => {
     setData({
       ...data,
-      task: task
-    })
+      task: task,
+    });
     openModal("form__modal--view", task);
-  }
+  };
 
   const openModal = (id, otherData = null) => {
     let modal = document.getElementById(id);
@@ -59,8 +68,8 @@ const BoardContextProvider = ({ children }) => {
     const overlay = document.getElementById("overlay");
 
     if (data.modalOpen) {
-      closeModal()
-      return
+      closeModal();
+      return;
     }
 
     if (modal.id === "boards__modal") {
@@ -83,7 +92,7 @@ const BoardContextProvider = ({ children }) => {
       ...data,
       modal,
       modalOpen: true,
-      otherData
+      otherData,
     });
   };
 
@@ -107,13 +116,21 @@ const BoardContextProvider = ({ children }) => {
     setData({
       ...data,
       modal: null,
-      modalOpen: false
+      modalOpen: false,
     });
   };
 
   return (
     <BoardContext.Provider
-      value={{ closeModal, openModal, selectBoard, data, loading, selectTask, setData }}
+      value={{
+        closeModal,
+        openModal,
+        selectBoard,
+        data,
+        loading,
+        selectTask,
+        setData,
+      }}
     >
       {children}
     </BoardContext.Provider>

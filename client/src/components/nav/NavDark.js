@@ -42,7 +42,7 @@ const NavDark = () => {
         <img className="logo" src="/assets/logo-mobile.svg" />
         <div onClick={handleClickTitle}>
           <button className="logo__title text--white">
-            Platform Launch
+            {boards?.find(board => board._id === selectedBoard).name}
             <img id="icon-arrow" src="/assets/icon-chevron-down.svg" />
           </button>
         </div>
