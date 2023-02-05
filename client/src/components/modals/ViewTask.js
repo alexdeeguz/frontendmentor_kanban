@@ -11,7 +11,7 @@ const ViewTaskModal = ({ task, columns, fetchData }) => {
 
   const handleClickSave = (e) => {
     e.preventDefault();
-    
+
     updateTask(updatedTask._id, updatedTask)
       .then(() => fetchData())
   };
@@ -47,7 +47,7 @@ const ViewTaskModal = ({ task, columns, fetchData }) => {
     <div id="form__modal--view" className="form__modal">
       <form className="form__modal-content bg--dark-grey">
         <h1>{updatedTask?.title}</h1>
-        <p className="text--medium">{updatedTask?.description}</p>
+        <p id="form__modal--desc" className="text--medium">{updatedTask?.description}</p>
 
         <p>
           Subtasks ({completedTasks} of {updatedTask?.subtasks.length})
