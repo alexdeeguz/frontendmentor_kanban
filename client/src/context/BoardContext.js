@@ -13,6 +13,7 @@ const BoardContextProvider = ({ children }) => {
   }, []);
 
   const fetchData = async () => {
+    setLoading(true)
     const boardsResponse = await fetchBoards();
     const currentBoard = boardsResponse.data[0];
 
@@ -29,13 +30,17 @@ const BoardContextProvider = ({ children }) => {
         selectedBoard: currentBoard,
         boards: boardsResponse.data,
         columns: columnsResponse.data,
+        boardName: ""
       });
     } else {
+      // const boardName = boardsResponse?.data.find(el => el._id === board)
+      // console.log(boardName)
       setData({
         ...data,
         selectedBoard: board,
         boards: boardsResponse.data,
         columns: columnsResponse.data,
+        boardName: boardsResponse?.data.find((el) => el._id === board).name
       });
     }
     closeModal()

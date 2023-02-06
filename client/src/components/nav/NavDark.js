@@ -11,11 +11,12 @@ import ViewTaskModal from "../modals/ViewTask";
 
 const NavDark = () => {
   const {
+    loading,
     openModal,
     closeModal,
     selectBoard,
     fetchData,
-    data: { boards, selectedBoard, otherData, columns },
+    data: { boards, selectedBoard, otherData, columns, boardName, modalOpen },
   } = useContext(BoardContext);
 
   const handleClickTitle = (e) => {
@@ -36,13 +37,16 @@ const NavDark = () => {
       element.classList.add("hidden");
     }
   };
+
+  if (loading) return null
+
   return (
     <nav className="nav bg--dark-grey">
       <div>
         <img className="logo" src="/assets/logo-mobile.svg" />
         <div onClick={handleClickTitle}>
           <button className="logo__title text--white">
-            {boards?.find(board => board._id === selectedBoard).name}
+            {boards?.find((board) => board._id === selectedBoard).name}
             <img id="icon-arrow" src="/assets/icon-chevron-down.svg" />
           </button>
         </div>
@@ -66,7 +70,9 @@ const NavDark = () => {
           >
             Edit Board
           </p>
-          <p className="text--red" onClick={() => openModal("delete__modal")}>Delete Board</p>
+          <p className="text--red" onClick={() => openModal("delete__modal")}>
+            Delete Board
+          </p>
         </div>
       </div>
 
@@ -79,9 +85,19 @@ const NavDark = () => {
       <AddFormModal closeModal={closeModal} />
       <EditFormModal closeModal={closeModal} />
       <AddBoardModal closeModal={closeModal} />
-      <EditBoardModal closeModal={closeModal} />
+      <EditBoardModal
+        closeModal={closeModal}
+        boardName={boardName}
+        columns={columns}
+        modalOpen={modalOpen}
+      />
       <DeleteModal closeModal={closeModal} />
-      <ViewTaskModal closeModal={closeModal} task={otherData} columns={columns} fetchData={fetchData} />
+      <ViewTaskModal
+        closeModal={closeModal}
+        task={otherData}
+        columns={columns}
+        fetchData={fetchData}
+      />
     </nav>
   );
 };
