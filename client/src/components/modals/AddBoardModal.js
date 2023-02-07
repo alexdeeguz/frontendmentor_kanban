@@ -1,34 +1,95 @@
+import { useState } from "react";
+import { createBoard } from "../../actions/boards";
+import { createColumn } from "../../actions/columns";
+
 const AddBoardModal = () => {
+  const [name, setName] = useState("");
+  const [columns, setColumns] = useState([{ idx: 0, name: "" }]);
+
+  const addColumn = (e, idx) => {
+    e.preventDefault();
+
+    setColumns([...columns, { idx, name: "" }]);
+  };
+
+  const deleteColumn = (e, idx) => {
+    e.preventDefault();
+    console.log(idx);
+    let newCols = [];
+    columns.forEach((col) => {
+      console.log(col);
+      if (idx !== col.idx) newCols.push(col);
+    });
+
+    setColumns(newCols);
+  };
+
+  const updateColumn = (e, idx) => {
+    e.preventDefault();
+
+    let newCols = [];
+    columns.forEach((col) => {
+      if (idx === col.idx) {
+        newCols.push({ ...col, name: e.target.value });
+      } else {
+        newCols.push(col)
+      }
+    });
+
+    setColumns(newCols);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let promises = []
+    createBoard({name})
+      .then((res) => {
+        columns.forEach(el => {
+            promises.push(createColumn({ board: res.data._id, name: el.name }));
+        })
+        Promise.all(promises)
+      })
+  }
+
   return (
     <div id="board__modal--add" className="form__modal">
       <form className="form__modal-content bg--dark-grey">
         <h1>Add New Board</h1>
         <label>
           Board Name
-          <input type="text" />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
         </label>
 
         <label>
           Board Columns
-          <div className="subtask">
-            <input type="text" />
-            <img src="/assets/icon-cross.svg" />
-          </div>
-          <div className="subtask">
-            <input type="text" />
-            <img src="/assets/icon-cross.svg" />
-          </div>
+          {columns?.sort((a, b) => a.idx - b.idx).map((el) => (
+            <div className="subtask" key={el.idx}>
+              <input
+                type="text"
+                value={el.name}
+                onChange={(e) => updateColumn(e, el.idx)}
+              />
+              <img
+                src="/assets/icon-cross.svg"
+                onClick={(e) => deleteColumn(e, el.idx)}
+              />
+            </div>
+          ))}
           <div id="add-task__button" className="btn-container">
-            <button className="btn bg--white text--main">
+            <button
+              className="btn bg--white text--main"
+              onClick={(e) => addColumn(e, columns.length)}
+            >
               + Add New Column
             </button>
           </div>
         </label>
 
-
-          <div id="add-task__button--bottom" className="btn-container">
-            <button className="btn bg--purple text--white">Create New Board</button>
-          </div>
+        <div id="add-task__button--bottom" className="btn-container">
+          <button className="btn bg--purple text--white" onClick={handleSubmit}>
+            Create New Board
+          </button>
+        </div>
       </form>
     </div>
   );

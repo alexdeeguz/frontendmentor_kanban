@@ -47,7 +47,7 @@ const NavDark = () => {
         <img className="logo" src="/assets/logo-mobile.svg" />
         <div onClick={handleClickTitle}>
           <button className="logo__title text--white">
-            {boards?.find((board) => board._id === selectedBoard).name}
+            {boards?.find((board) => board._id === selectedBoard) ? boards?.find((board) => board._id === selectedBoard).name : ""}
             <img id="icon-arrow" src="/assets/icon-chevron-down.svg" />
           </button>
         </div>
@@ -94,7 +94,7 @@ const NavDark = () => {
         selectedBoard={selectedBoard}
         fetchBoardsAndColumns={fetchBoardsAndColumns}
       />
-      <DeleteModal closeModal={closeModal} />
+      <DeleteModal closeModal={closeModal} selectedBoard={selectedBoard} fetchData={fetchBoardsAndColumns}/>
       <ViewTaskModal
         closeModal={closeModal}
         task={otherData}

@@ -53,4 +53,20 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const columns = await Column.find({ board: req.params.id })
+    const promises = []
+    columns.forEach(column => {
+      promises.push(Column.findByIdAndDelete(column._id))
+    })
+    Promise.all(promises)
+    await Board.findByIdAndDelete(req.params.id)
+    res.send()
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: "Server error" })
+  }
+})
+
 module.exports = router;

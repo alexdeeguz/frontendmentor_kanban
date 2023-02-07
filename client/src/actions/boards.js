@@ -11,3 +11,11 @@ export const fetchBoard = (id) => {
 export const editBoard = (id, columns, boardName) => {
   return axios.put(`/api/boards/${id}`, { columns, boardName })
 }
+
+export const createBoard = (data) => {
+  return axios.post("/api/boards", data)
+}
+
+export const deleteBoard = (id) => {
+  return axios.delete(`/api/boards/${id}`)
+}

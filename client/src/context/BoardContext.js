@@ -14,8 +14,7 @@ const BoardContextProvider = ({ children }) => {
 
   const fetchBoardsAndColumns = async () => {
     const boardsRes = await fetchBoards();
-    const columnsRes = await fetchColumns(data.selectedBoard);
-
+    const columnsRes = await fetchColumns(boardsRes.data[0]._id);
     const overlay = document.getElementById("overlay");
     data.modal.style.transform = "scale(0)";
     overlay.style.display = "none";
@@ -27,7 +26,9 @@ const BoardContextProvider = ({ children }) => {
       columns: columnsRes.data,
       modalOpen: false,
       boardName: boardsRes?.data.find((el) => el._id === data.selectedBoard)
-        .name,
+        ? boardsRes?.data.find((el) => el._id === data.selectedBoard).name
+        : "",
+      selectedBoard: boardsRes.data[0]._id,
     });
     setLoading(false);
   };
@@ -36,7 +37,6 @@ const BoardContextProvider = ({ children }) => {
     setLoading(true);
     const boardsResponse = await fetchBoards();
     const currentBoard = boardsResponse.data[0];
-
     const board = localStorage.getItem("board");
     const columnsResponse =
       board === null
@@ -45,6 +45,13 @@ const BoardContextProvider = ({ children }) => {
 
     if (board === null) {
       localStorage.setItem("board", currentBoard._id);
+      console.log({
+        ...data,
+        selectedBoard: currentBoard,
+        boards: boardsResponse.data,
+        columns: columnsResponse.data,
+        boardName: "",
+      });
       setData({
         ...data,
         selectedBoard: currentBoard,
@@ -64,6 +71,7 @@ const BoardContextProvider = ({ children }) => {
       });
     }
     closeModal();
+    // closeDrawer()
     setLoading(false);
   };
 
@@ -89,14 +97,17 @@ const BoardContextProvider = ({ children }) => {
   };
 
   const closeDrawer = () => {
-    document.getElementById("boards__modal").style.transform =
-      "translateX(-150%)";
-            document.getElementById("icon-arrow").style.transform =
-              "rotate(0deg)";
-                  document.getElementById("overlay").style.display = "none";
-                  setData({
-                    ...data, modalOpen: false
-                  })
+    let boardsModal = document.getElementById("boards__modal");
+    let arrow = document.getElementById("icon-arrow");
+    let overlay = document.getElementById("overlay");
+
+    if (boardsModal) boardsModal.style.transform = "translateX(-150%)";
+    if (arrow) arrow.style.transform = "rotate(0deg)";
+    if (overlay) overlay.style.display = "none";
+    setData({
+      ...data,
+      modalOpen: false,
+    });
   };
 
   const openModal = (id, otherData = null) => {

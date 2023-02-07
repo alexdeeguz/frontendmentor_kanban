@@ -1,7 +1,10 @@
-const DeleteModal = ({ closeModal }) => {
+import { deleteBoard } from "../../actions/boards";
 
+const DeleteModal = ({ closeModal, selectedBoard, fetchData }) => {
   const handleClickDelete = () => {
-    // console.log('delete')
+    localStorage.removeItem("board");
+    deleteBoard(selectedBoard)
+      .then(() => fetchData())
   };
 
   return (
