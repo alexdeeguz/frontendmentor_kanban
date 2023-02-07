@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { updateTask } from "../../actions/tasks";
 
-const ViewTaskModal = ({ task, columns, fetchData }) => {
+const ViewTaskModal = ({ task, columns, fetchData, closeModal }) => {
   let completedTasks = task?.subtasks.filter((task) => task.isCompleted).length;
   const [updatedTask, setUpdatedTask] = useState(task);
 
@@ -13,7 +13,10 @@ const ViewTaskModal = ({ task, columns, fetchData }) => {
     e.preventDefault();
 
     updateTask(updatedTask._id, updatedTask)
-      .then(() => fetchData())
+      .then(() => {
+        closeModal()
+        // fetchData()
+      })
   };
 
   const handleUpdate = (id) => {
