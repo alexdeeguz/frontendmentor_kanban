@@ -13,27 +13,27 @@ const BoardContextProvider = ({ children }) => {
   }, []);
 
   const fetchBoardsAndColumns = async () => {
-    const boardsRes = await fetchBoards()
-    const columnsRes = await fetchColumns(data.selectedBoard)
-    
+    const boardsRes = await fetchBoards();
+    const columnsRes = await fetchColumns(data.selectedBoard);
+
     const overlay = document.getElementById("overlay");
     data.modal.style.transform = "scale(0)";
     overlay.style.display = "none";
-    
-    setLoading(true)
+
+    setLoading(true);
     setData({
       ...data,
       boards: boardsRes.data,
       columns: columnsRes.data,
       modalOpen: false,
-      boardName: boardsRes?.data.find((el) => el._id === data.selectedBoard).name
-    })
-    setLoading(false)
-
-  }
+      boardName: boardsRes?.data.find((el) => el._id === data.selectedBoard)
+        .name,
+    });
+    setLoading(false);
+  };
 
   const fetchData = async () => {
-    setLoading(true)
+    setLoading(true);
     const boardsResponse = await fetchBoards();
     const currentBoard = boardsResponse.data[0];
 
@@ -50,7 +50,7 @@ const BoardContextProvider = ({ children }) => {
         selectedBoard: currentBoard,
         boards: boardsResponse.data,
         columns: columnsResponse.data,
-        boardName: ""
+        boardName: "",
       });
     } else {
       // const boardName = boardsResponse?.data.find(el => el._id === board)
@@ -60,10 +60,10 @@ const BoardContextProvider = ({ children }) => {
         selectedBoard: board,
         boards: boardsResponse.data,
         columns: columnsResponse.data,
-        boardName: boardsResponse?.data.find((el) => el._id === board).name
+        boardName: boardsResponse?.data.find((el) => el._id === board).name,
       });
     }
-    closeModal()
+    closeModal();
     setLoading(false);
   };
 
@@ -88,13 +88,24 @@ const BoardContextProvider = ({ children }) => {
     openModal("form__modal--view", task);
   };
 
+  const closeDrawer = () => {
+    document.getElementById("boards__modal").style.transform =
+      "translateX(-150%)";
+            document.getElementById("icon-arrow").style.transform =
+              "rotate(0deg)";
+                  document.getElementById("overlay").style.display = "none";
+                  setData({
+                    ...data, modalOpen: false
+                  })
+  };
+
   const openModal = (id, otherData = null) => {
     let modal = document.getElementById(id);
     let arrow = document.getElementById("icon-arrow");
     const overlay = document.getElementById("overlay");
 
-    if (data.modalOpen) {
-      closeModal();
+    if (data.modalOpen && id !== "board__modal--add") {
+      closeDrawer();
       return;
     }
 
@@ -123,7 +134,7 @@ const BoardContextProvider = ({ children }) => {
   };
 
   const closeModal = () => {
-    if (data.modal === undefined) return
+    if (data.modal === undefined) return;
     const overlay = document.getElementById("overlay");
 
     if (data.modal.id === "boards__modal") {
@@ -138,6 +149,7 @@ const BoardContextProvider = ({ children }) => {
       data.modal.id === "delete__modal"
     ) {
       data.modal.style.transform = "scale(0)";
+      closeDrawer();
     }
     overlay.style.display = "none";
     setData({
@@ -158,7 +170,7 @@ const BoardContextProvider = ({ children }) => {
         selectTask,
         setData,
         fetchData,
-        fetchBoardsAndColumns
+        fetchBoardsAndColumns,
       }}
     >
       {children}
