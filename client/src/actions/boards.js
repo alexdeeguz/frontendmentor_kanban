@@ -7,3 +7,7 @@ export const fetchBoards = () => {
 export const fetchBoard = (id) => {
   return axios.get(`/api/boards/${id}`)
 }
+
+export const editBoard = (id, columns, boardName) => {
+  return axios.put(`/api/boards/${id}`, { columns, boardName })
+}

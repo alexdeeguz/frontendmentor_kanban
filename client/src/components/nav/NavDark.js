@@ -16,6 +16,7 @@ const NavDark = () => {
     closeModal,
     selectBoard,
     fetchData,
+    fetchBoardsAndColumns,
     data: { boards, selectedBoard, otherData, columns, boardName, modalOpen },
   } = useContext(BoardContext);
 
@@ -90,6 +91,8 @@ const NavDark = () => {
         boardName={boardName}
         columns={columns}
         modalOpen={modalOpen}
+        selectedBoard={selectedBoard}
+        fetchBoardsAndColumns={fetchBoardsAndColumns}
       />
       <DeleteModal closeModal={closeModal} />
       <ViewTaskModal

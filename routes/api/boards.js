@@ -28,8 +28,25 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const board = await Board.findById(req.params.id)
-    res.json(board)
+    const board = await Board.findById(req.params.id);
+    res.json(board);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  const { columns, boardName } = req.body
+  const updates = []
+  try {
+    await Board.findByIdAndUpdate(req.params.id, { name: boardName })
+    columns.forEach(col => {
+      updates.push(Column.findByIdAndUpdate(col._id, { name: col.name }))
+    })
+
+    await Promise.all(updates)
+    res.send()
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Server error" });

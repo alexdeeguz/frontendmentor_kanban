@@ -12,6 +12,26 @@ const BoardContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  const fetchBoardsAndColumns = async () => {
+    const boardsRes = await fetchBoards()
+    const columnsRes = await fetchColumns(data.selectedBoard)
+    
+    const overlay = document.getElementById("overlay");
+    data.modal.style.transform = "scale(0)";
+    overlay.style.display = "none";
+    
+    setLoading(true)
+    setData({
+      ...data,
+      boards: boardsRes.data,
+      columns: columnsRes.data,
+      modalOpen: false,
+      boardName: boardsRes?.data.find((el) => el._id === data.selectedBoard).name
+    })
+    setLoading(false)
+
+  }
+
   const fetchData = async () => {
     setLoading(true)
     const boardsResponse = await fetchBoards();
@@ -137,7 +157,8 @@ const BoardContextProvider = ({ children }) => {
         loading,
         selectTask,
         setData,
-        fetchData
+        fetchData,
+        fetchBoardsAndColumns
       }}
     >
       {children}

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { editBoard } from "../../actions/boards";
 
-const EditBoardModal = ({ boardName, modalOpen, columns }) => {
+const EditBoardModal = ({ boardName, modalOpen, columns, selectedBoard, fetchBoardsAndColumns }) => {
   const [name, setName] = useState(boardName)
   const [columnNames, setColumnNames] = useState(columns)
   useEffect(() => {
     setName(boardName)
     setColumnNames(columns)
-  }, [boardName, modalOpen])
+  }, [boardName, modalOpen, columns])
 
   const handleUpdate = (e, id) => {
     let newColumns = []
@@ -19,6 +20,13 @@ const EditBoardModal = ({ boardName, modalOpen, columns }) => {
     })
 
     setColumnNames(newColumns)
+  }
+
+  const handleClickSave = (e) => {
+    e.preventDefault();
+    
+    editBoard(selectedBoard, columnNames, name)
+      .then(() => fetchBoardsAndColumns())
   }
   return (
     <div id="board__modal--edit" className="form__modal">
@@ -49,7 +57,7 @@ const EditBoardModal = ({ boardName, modalOpen, columns }) => {
         </label>
 
         <div id="add-task__button--bottom" className="btn-container">
-          <button className="btn bg--purple text--white">Save Changes</button>
+          <button className="btn bg--purple text--white" onClick={handleClickSave}>Save Changes</button>
         </div>
       </form>
     </div>
