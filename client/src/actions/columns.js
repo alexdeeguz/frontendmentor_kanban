@@ -7,3 +7,7 @@ export const fetchColumns = (boardId) => {
 export const createColumn = (data) => {
   return axios.post("/api/columns", data)
 }
+
+export const deleteColumn = (id) => {
+  return axios.delete(`/api/columns/${id}`)
+}

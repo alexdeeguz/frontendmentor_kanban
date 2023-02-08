@@ -67,7 +67,7 @@ body {
 }
 
 #overlay {
-  width: 100vw !important;
+  width: 100%;
   /* height: calc(100vh - 64px); */
   height: 110vh;
   position: absolute;

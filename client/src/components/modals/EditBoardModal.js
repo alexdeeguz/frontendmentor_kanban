@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { editBoard } from "../../actions/boards";
-import { createColumn } from "../../actions/columns";
+import { createColumn, deleteColumn } from "../../actions/columns";
 
 const EditBoardModal = ({
   boardName,
@@ -13,6 +13,8 @@ const EditBoardModal = ({
   const [name, setName] = useState(boardName);
   const [columnNames, setColumnNames] = useState(columns);
   const [newColumns, setNewColumns] = useState([]);
+  const [columnsToDelete, setColumnsToDelete] = useState([]);
+
   useEffect(() => {
     setName(boardName);
     setColumnNames(columns);
@@ -38,19 +40,47 @@ const EditBoardModal = ({
       selectBoard(selectedBoard);
     });
 
-    let promises = []
+    let promises = [];
     if (newColumns.length) {
-      newColumns.forEach(col => {
+      newColumns.forEach((col) => {
         promises.push(createColumn({ name: col.name, board: selectedBoard }));
+      });
+    }
+
+    if (columnsToDelete.length) {
+      columnsToDelete.forEach(col => {
+        promises.push(deleteColumn(col._id))
       })
     }
-    
-    Promise.all(promises)
+
+    console.log(promises)
+    Promise.all(promises);
   };
 
-  const addColumn = (e, idx) => {
+  const addColumn = (e) => {
     e.preventDefault();
     setNewColumns([...newColumns, { idx: newColumns.length }]);
+  };
+
+  const removeColumn = (e, idx) => {
+    e.preventDefault();
+    let newCols = [];
+    newColumns.forEach((col) => {
+      if (idx !== col.idx) newCols.push(col);
+    });
+
+    setNewColumns(newCols);
+  };
+
+  const handleDeleteColumn = (column) => {
+    let newCols = [];
+    columnNames.forEach((el) => {
+      if (el._id !== column._id) {
+        newCols.push(el);
+      }
+    });
+    setColumnNames(newCols)
+    setColumnsToDelete([...columnsToDelete, column]);
   };
 
   const updateColumn = (e, idx) => {
@@ -68,7 +98,6 @@ const EditBoardModal = ({
     setNewColumns(newCols);
   };
 
-  console.log(newColumns)
   return (
     <div id="board__modal--edit" className="form__modal">
       <form className="form__modal-content bg--dark-grey">
@@ -91,7 +120,10 @@ const EditBoardModal = ({
                 value={el.name}
                 onChange={(e) => handleUpdate(e, el._id)}
               />
-              <img src="/assets/icon-cross.svg" />
+              <img
+                src="/assets/icon-cross.svg"
+                onClick={(e) => handleDeleteColumn(el)}
+              />
             </div>
           ))}
           {newColumns.map((el) => (
@@ -101,7 +133,10 @@ const EditBoardModal = ({
                 value={el.name}
                 onChange={(e) => updateColumn(e, el.idx)}
               />
-              <img src="/assets/icon-cross.svg" />
+              <img
+                src="/assets/icon-cross.svg"
+                onClick={(e) => removeColumn(e, el.idx)}
+              />
             </div>
           ))}
           <div id="add-task__button" className="btn-container">
