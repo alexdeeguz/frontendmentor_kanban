@@ -25,9 +25,7 @@ const BoardContextProvider = ({ children }) => {
       boards: boardsRes.data,
       columns: columnsRes.data,
       modalOpen: false,
-      boardName: boardsRes?.data.find((el) => el._id === data.selectedBoard)
-        ? boardsRes?.data.find((el) => el._id === data.selectedBoard).name
-        : "",
+      boardName: boardsRes.data.find(el => el._id === data.selectedBoard).name,
       selectedBoard: boardsRes.data[0]._id,
     });
     setLoading(false);
@@ -75,8 +73,9 @@ const BoardContextProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const selectBoard = (id) => {
+  const selectBoard = async (id) => {
     localStorage.setItem("board", id);
+    const boardsResponse = await fetchBoards()
     fetchColumns(id).then((res) => {
       closeModal();
       setData({
@@ -84,6 +83,9 @@ const BoardContextProvider = ({ children }) => {
         columns: res.data,
         selectedBoard: id,
         modalOpen: false,
+        boards: boardsResponse.data,
+        boardName: boardsResponse.data?.find((el) => el._id === id).name,
+        modalOpen: false
       });
     });
   };

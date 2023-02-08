@@ -46,7 +46,7 @@ router.put("/:id", async (req, res) => {
     })
 
     await Promise.all(updates)
-    res.send()
+    res.json(boardName)
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Server error" });

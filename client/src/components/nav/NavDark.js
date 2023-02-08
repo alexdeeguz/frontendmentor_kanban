@@ -47,7 +47,7 @@ const NavDark = () => {
         <img className="logo" src="/assets/logo-mobile.svg" />
         <div onClick={handleClickTitle}>
           <button className="logo__title text--white">
-            {boards?.find((board) => board._id === selectedBoard) ? boards?.find((board) => board._id === selectedBoard).name : ""}
+            {boardName}
             <img id="icon-arrow" src="/assets/icon-chevron-down.svg" />
           </button>
         </div>
@@ -83,9 +83,9 @@ const NavDark = () => {
         openModal={openModal}
         selectBoard={selectBoard}
       />
-      <AddFormModal closeModal={closeModal} />
+      <AddFormModal closeModal={closeModal} columns={columns} />
       <EditFormModal closeModal={closeModal} />
-      <AddBoardModal closeModal={closeModal} />
+      <AddBoardModal closeModal={closeModal} selectBoard={selectBoard}/>
       <EditBoardModal
         closeModal={closeModal}
         boardName={boardName}
@@ -93,8 +93,13 @@ const NavDark = () => {
         modalOpen={modalOpen}
         selectedBoard={selectedBoard}
         fetchBoardsAndColumns={fetchBoardsAndColumns}
+        selectBoard={selectBoard}
       />
-      <DeleteModal closeModal={closeModal} selectedBoard={selectedBoard} fetchData={fetchBoardsAndColumns}/>
+      <DeleteModal
+        closeModal={closeModal}
+        selectedBoard={selectedBoard}
+        fetchData={fetchBoardsAndColumns}
+      />
       <ViewTaskModal
         closeModal={closeModal}
         task={otherData}

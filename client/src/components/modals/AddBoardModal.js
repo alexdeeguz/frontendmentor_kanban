@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createBoard } from "../../actions/boards";
 import { createColumn } from "../../actions/columns";
 
-const AddBoardModal = () => {
+const AddBoardModal = ({ selectBoard }) => {
   const [name, setName] = useState("");
   const [columns, setColumns] = useState([{ idx: 0, name: "" }]);
 
@@ -14,10 +14,8 @@ const AddBoardModal = () => {
 
   const deleteColumn = (e, idx) => {
     e.preventDefault();
-    console.log(idx);
     let newCols = [];
     columns.forEach((col) => {
-      console.log(col);
       if (idx !== col.idx) newCols.push(col);
     });
 
@@ -47,7 +45,11 @@ const AddBoardModal = () => {
         columns.forEach(el => {
             promises.push(createColumn({ board: res.data._id, name: el.name }));
         })
-        Promise.all(promises)
+        Promise.all(promises).then(() => {
+          selectBoard(res.data._id)
+          setName("")
+          setColumns([{ idx: 0, name: "" }]);
+        })
       })
   }
 

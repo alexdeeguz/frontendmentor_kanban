@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { editBoard } from "../../actions/boards";
 
-const EditBoardModal = ({ boardName, modalOpen, columns, selectedBoard, fetchBoardsAndColumns }) => {
+const EditBoardModal = ({ boardName, modalOpen, columns, selectedBoard, fetchBoardsAndColumns, selectBoard }) => {
   const [name, setName] = useState(boardName)
   const [columnNames, setColumnNames] = useState(columns)
   useEffect(() => {
@@ -26,7 +26,12 @@ const EditBoardModal = ({ boardName, modalOpen, columns, selectedBoard, fetchBoa
     e.preventDefault();
     
     editBoard(selectedBoard, columnNames, name)
-      .then(() => fetchBoardsAndColumns())
+      .then((res) => {
+        fetchBoardsAndColumns().then(() => {
+          // selectBoard(selectedBoard)
+          setName(res.data.boardName)
+        })
+      })
   }
   return (
     <div id="board__modal--edit" className="form__modal">
