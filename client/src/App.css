@@ -48,7 +48,8 @@ body {
 
 .home {
   /* width: 100vw; */
-    /* overflow-x: scroll; */
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 .home > div  {
   display: flex;
@@ -58,10 +59,11 @@ body {
 
 .App {
   position: relative;
-  height: 110vh;
+  height: 100vh;
   /* height: 100%; */
   /* width: 100vw; */
-  /* overflow: hidden; */
+  overflow: hidden;
+  /* overflow-x: scroll; */
 }
 
 #overlay {
