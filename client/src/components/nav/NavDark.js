@@ -83,7 +83,7 @@ const NavDark = () => {
         openModal={openModal}
         selectBoard={selectBoard}
       />
-      <AddFormModal closeModal={closeModal} columns={columns} />
+      <AddFormModal closeModal={closeModal} columns={columns} fetchData={fetchData}/>
       <EditFormModal closeModal={closeModal} />
       <AddBoardModal closeModal={closeModal} selectBoard={selectBoard}/>
       <EditBoardModal
@@ -104,7 +104,6 @@ const NavDark = () => {
         closeModal={closeModal}
         task={otherData}
         columns={columns}
-        fetchData={fetchData}
       />
     </nav>
   );

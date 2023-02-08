@@ -57,7 +57,11 @@ router.delete("/:id", async (req, res) => {
   try {
     const columns = await Column.find({ board: req.params.id })
     const promises = []
-    columns.forEach(column => {
+    columns.forEach(async (column) => {
+      const tasks = await Task.find({ status: column._id })
+      tasks.forEach(task => {
+        promises.push(Task.findByIdAndDelete(task._id))
+      })
       promises.push(Column.findByIdAndDelete(column._id))
     })
     Promise.all(promises)

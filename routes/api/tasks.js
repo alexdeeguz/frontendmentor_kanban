@@ -3,9 +3,11 @@ const router = express.Router();
 const Task = require("../../models/Task");
 
 router.post("/", async (req, res) => {
+  console.log(req.body)
   const { title, description, status, subtasks } = req.body;
   try {
     const task = new Task({ title, description, status, subtasks });
+    console.log(task)
     await task.save();
     res.json(task);
   } catch (err) {

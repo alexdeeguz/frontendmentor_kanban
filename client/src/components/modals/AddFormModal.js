@@ -8,7 +8,6 @@ const AddFormModal = ({ columns, closeModal }) => {
     { idx: 0, title: "", isCompleted: false },
   ]);
   const [selectedStatus, setSelectedStatus] = useState(columns[0]._id);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     createTask({ title, description, status: selectedStatus, subtasks }).then(
@@ -17,11 +16,10 @@ const AddFormModal = ({ columns, closeModal }) => {
         setTitle("")
         setDescription("")
         setSubtasks([{ idx: 0, title: "", isCompleted: false }]);
-        setSelectedStatus(columns[0]._id);
+        setSelectedStatus("select");
       }
     );
   };
-
   const updateSubtask = (e, idx) => {
     let newCols = [];
     subtasks.forEach((task) => {
@@ -101,10 +99,10 @@ const AddFormModal = ({ columns, closeModal }) => {
 
         <label>
           Status
-          <select onChange={(e) => setSelectedStatus(e.target.value)}>
+          <select onChange={(e) => setSelectedStatus(e.target.value)} defaultValue="select">
+            <option value="select">--Select status--</option>
             {columns?.map((column) => (
               <option
-                selected={selectedStatus === column._id}
                 value={column._id}
                 key={column._id}
               >
