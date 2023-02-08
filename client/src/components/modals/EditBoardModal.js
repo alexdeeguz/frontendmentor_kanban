@@ -27,10 +27,7 @@ const EditBoardModal = ({ boardName, modalOpen, columns, selectedBoard, fetchBoa
     
     editBoard(selectedBoard, columnNames, name)
       .then((res) => {
-        fetchBoardsAndColumns().then(() => {
-          // selectBoard(selectedBoard)
-          setName(res.data.boardName)
-        })
+          selectBoard(selectedBoard)
       })
   }
   return (

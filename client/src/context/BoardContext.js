@@ -19,13 +19,15 @@ const BoardContextProvider = ({ children }) => {
     data.modal.style.transform = "scale(0)";
     overlay.style.display = "none";
 
+    
+    let selectedBoardName = data.selectBoard ? data.selectedBoard.name : boardsRes.data[0].name
     setLoading(true);
     setData({
       ...data,
       boards: boardsRes.data,
       columns: columnsRes.data,
       modalOpen: false,
-      boardName: boardsRes.data.find(el => el._id === data.selectedBoard).name,
+      boardName: selectedBoardName,
       selectedBoard: boardsRes.data[0]._id,
     });
     setLoading(false);
@@ -43,13 +45,7 @@ const BoardContextProvider = ({ children }) => {
 
     if (board === null) {
       localStorage.setItem("board", currentBoard._id);
-      console.log({
-        ...data,
-        selectedBoard: currentBoard,
-        boards: boardsResponse.data,
-        columns: columnsResponse.data,
-        boardName: "",
-      });
+      setLoading(false)
       setData({
         ...data,
         selectedBoard: currentBoard,
@@ -60,6 +56,7 @@ const BoardContextProvider = ({ children }) => {
     } else {
       // const boardName = boardsResponse?.data.find(el => el._id === board)
       // console.log(boardName)
+      setLoading(false)
       setData({
         ...data,
         selectedBoard: board,
