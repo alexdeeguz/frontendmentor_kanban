@@ -16,9 +16,12 @@ const Home = () => {
     <div className="home">
       <div>
         <Overlay closeModal={closeModal}/>
+        <div>
+
         {data.columns?.map((column) => (
           <Column key={column._id} column={column} openModal={openModal} selectTask={selectTask} data={data}/>
         ))}
+        </div>
         {/* <Overlay /> */}
       </div>
     </div>

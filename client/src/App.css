@@ -52,10 +52,16 @@ body {
     overflow-y: hidden;
 }
 .home > div  {
-  display: flex;
-  width: min-content;
-  position: relative;
+  /* display: flex; */
+  /* width: min-content; */
+  /* position: relative; */
   width: 100%;
+}
+
+.home > div > div:last-child {
+  display: flex;
+  width: fit-content;
+    position: relative;
 }
 
 .App {
