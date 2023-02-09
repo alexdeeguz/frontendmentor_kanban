@@ -39,7 +39,7 @@ const NavDark = () => {
     }
   };
 
-  if (loading) return null
+  if (loading) return null;
 
   return (
     <nav className="nav bg--dark-grey">
@@ -83,9 +83,17 @@ const NavDark = () => {
         openModal={openModal}
         selectBoard={selectBoard}
       />
-      <AddFormModal closeModal={closeModal} columns={columns} fetchData={fetchData}/>
-      <EditFormModal closeModal={closeModal} />
-      <AddBoardModal closeModal={closeModal} selectBoard={selectBoard}/>
+      <AddFormModal
+        closeModal={closeModal}
+        columns={columns}
+        fetchData={fetchData}
+      />
+      <EditFormModal
+        closeModal={closeModal}
+        columns={columns}
+        task={otherData}
+      />
+      <AddBoardModal closeModal={closeModal} selectBoard={selectBoard} />
       <EditBoardModal
         closeModal={closeModal}
         boardName={boardName}
@@ -104,6 +112,7 @@ const NavDark = () => {
         closeModal={closeModal}
         task={otherData}
         columns={columns}
+        openModal={openModal}
       />
     </nav>
   );

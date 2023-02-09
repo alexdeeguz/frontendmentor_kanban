@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { updateTask } from "../../actions/tasks";
+import { updateTask, deleteTask } from "../../actions/tasks";
 
-const ViewTaskModal = ({ task, columns, fetchData, closeModal }) => {
+const ViewTaskModal = ({ task, columns, openModal, closeModal }) => {
   let completedTasks = task?.subtasks.filter((task) => task.isCompleted).length;
   const [updatedTask, setUpdatedTask] = useState(task);
 
@@ -15,7 +15,6 @@ const ViewTaskModal = ({ task, columns, fetchData, closeModal }) => {
     updateTask(updatedTask._id, updatedTask)
       .then(() => {
         closeModal()
-        // fetchData()
       })
   };
 
@@ -46,11 +45,55 @@ const ViewTaskModal = ({ task, columns, fetchData, closeModal }) => {
     setUpdatedTask(taskk);
   };
 
+    const handleClickEllipses = () => {
+      let element = document.getElementById("ellipses__options--task");
+      if (element.classList.contains("hidden")) {
+        element.classList.remove("hidden");
+      } else {
+        element.classList.add("hidden");
+      }
+    };
+
+    const handleClickEditTask = (e) => {
+      e.preventDefault();
+      document.getElementById("ellipses__options--task").classList.add("hidden")
+      openModal("form__modal--edit", updatedTask);
+    }
+
+    const handleClickDeleteTask = () => {
+      deleteTask(updatedTask._id)
+        .then(() => {
+          closeModal()
+        })
+    }
+
   return (
     <div id="form__modal--view" className="form__modal">
       <form className="form__modal-content bg--dark-grey">
-        <h1>{updatedTask?.title}</h1>
-        <p id="form__modal--desc" className="text--medium">{updatedTask?.description}</p>
+        <div className="form__modal-content--task">
+          <h1>{updatedTask?.title}</h1>
+          <div className="icon__ellipses" onClick={handleClickEllipses}>
+            <img src="/assets/icon-vertical-ellipsis.svg" />
+          </div>
+
+          <div
+            id="ellipses__options--task"
+            className="ellipses__options bg--dark hidden"
+          >
+            <p
+              className="text--medium"
+              onClick={handleClickEditTask}
+            >
+              Edit Task
+            </p>
+            <p className="text--red" onClick={handleClickDeleteTask}>
+              Delete
+            </p>
+          </div>
+        </div>
+        <p id="form__modal--desc" className="text--medium">
+          {updatedTask?.description}
+        </p>
 
         <p>
           Subtasks ({completedTasks} of {updatedTask?.subtasks.length})

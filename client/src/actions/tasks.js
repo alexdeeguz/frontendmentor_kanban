@@ -11,3 +11,7 @@ export const updateTask = (id, task) => {
 export const createTask = (data) => {
     return axios.post("/api/tasks", data)
 }
+
+export const deleteTask = (id) => {
+    return axios.delete(`/api/tasks/${id}`)
+}

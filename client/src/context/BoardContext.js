@@ -19,8 +19,9 @@ const BoardContextProvider = ({ children }) => {
     data.modal.style.transform = "scale(0)";
     overlay.style.display = "none";
 
-    
-    let selectedBoardName = data.selectBoard ? data.selectedBoard.name : boardsRes.data[0].name
+    let selectedBoardName = data.selectBoard
+      ? data.selectedBoard.name
+      : boardsRes.data[0].name;
     setLoading(true);
     setData({
       ...data,
@@ -45,7 +46,7 @@ const BoardContextProvider = ({ children }) => {
 
     if (board === null) {
       localStorage.setItem("board", currentBoard._id);
-      setLoading(false)
+      setLoading(false);
       setData({
         ...data,
         selectedBoard: currentBoard,
@@ -56,7 +57,7 @@ const BoardContextProvider = ({ children }) => {
     } else {
       // const boardName = boardsResponse?.data.find(el => el._id === board)
       // console.log(boardName)
-      setLoading(false)
+      setLoading(false);
       setData({
         ...data,
         selectedBoard: board,
@@ -72,7 +73,7 @@ const BoardContextProvider = ({ children }) => {
 
   const selectBoard = async (id) => {
     localStorage.setItem("board", id);
-    const boardsResponse = await fetchBoards()
+    const boardsResponse = await fetchBoards();
     fetchColumns(id).then((res) => {
       closeModal();
       setData({
@@ -82,7 +83,7 @@ const BoardContextProvider = ({ children }) => {
         modalOpen: false,
         boards: boardsResponse.data,
         boardName: boardsResponse.data?.find((el) => el._id === id).name,
-        modalOpen: false
+        modalOpen: false,
       });
     });
   };
@@ -114,7 +115,11 @@ const BoardContextProvider = ({ children }) => {
     let arrow = document.getElementById("icon-arrow");
     const overlay = document.getElementById("overlay");
 
-    if (data.modalOpen && id !== "board__modal--add") {
+    if (
+      data.modalOpen &&
+      id !== "board__modal--add" &&
+      id !== "form__modal--edit"
+    ) {
       closeDrawer();
       return;
     }
@@ -124,12 +129,15 @@ const BoardContextProvider = ({ children }) => {
       modal.style.transform = "translate(0,0)";
     } else if (
       modal.id === "form__modal--add" ||
-      modal.id === "form__modal--edit" ||
       modal.id === "board__modal--add" ||
       modal.id === "board__modal--edit" ||
       modal.id === "form__modal--view" ||
       modal.id === "delete__modal"
     ) {
+      modal.style.transform = "scale(100%)";
+      modal.style.transform += "translateX(-50%)";
+    } else if (modal.id === "form__modal--edit") {
+      document.getElementById("form__modal--view").style.transform = "scale(0)";
       modal.style.transform = "scale(100%)";
       modal.style.transform += "translateX(-50%)";
     }

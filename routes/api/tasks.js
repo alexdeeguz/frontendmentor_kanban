@@ -3,11 +3,10 @@ const router = express.Router();
 const Task = require("../../models/Task");
 
 router.post("/", async (req, res) => {
-  console.log(req.body)
   const { title, description, status, subtasks } = req.body;
   try {
     const task = new Task({ title, description, status, subtasks });
-    console.log(task)
+    console.log(task);
     await task.save();
     res.json(task);
   } catch (err) {
@@ -28,15 +27,25 @@ router.get("/:columnId", async (req, res) => {
 });
 
 router.put("/:taskId", async (req, res) => {
-  const { title, description, status, subtasks } = req.body
-  const id = req.params.taskId
+  const { title, description, status, subtasks } = req.body;
+  const id = req.params.taskId;
   try {
-    await Task.findByIdAndUpdate(id, { title, description, status, subtasks })
-    res.send()
+    await Task.findByIdAndUpdate(id, { title, description, status, subtasks });
+    res.send();
   } catch (err) {
-    console.log(err)
-    res.status(500).json({ error: "Server error"})
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
   }
-})
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    await Task.findByIdAndDelete(req.params.id);
+    res.send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 module.exports = router;

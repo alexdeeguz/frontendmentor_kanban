@@ -293,6 +293,24 @@ input[type="checkbox"] {
   text-decoration: line-through;
 }
 
-.form__modal-content > h1, #form__modal--desc {
+.form__modal-content > h1, #form__modal--desc, .form__modal-content--task > h1 {
   margin-bottom: 24px;
 }
+
+.form__modal-content--task {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.form__modal-content--task img {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#ellipses__options--task {
+  position: absolute;
+  top: 25px;
+  left: 70%;
+}
+
