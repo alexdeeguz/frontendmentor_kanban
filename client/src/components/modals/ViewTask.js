@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { updateTask, deleteTask } from "../../actions/tasks";
 
-const ViewTaskModal = ({ task, columns, openModal, closeModal }) => {
+const ViewTaskModal = ({ task, columns, openModal, closeModal, darkMode }) => {
   let completedTasks = task?.subtasks.filter((task) => task.isCompleted).length;
   const [updatedTask, setUpdatedTask] = useState(task);
 
@@ -68,22 +68,30 @@ const ViewTaskModal = ({ task, columns, openModal, closeModal }) => {
     }
 
   return (
-    <div id="form__modal--view" className="form__modal">
-      <form className="form__modal-content bg--dark-grey">
+    <div
+      id="form__modal--view"
+      className={`form__modal ${darkMode ? "text--white" : "text--dark"}`}
+    >
+      <form
+        className={`form__modal-content ${
+          darkMode ? "bg--dark-grey" : "bg--white"
+        }`}
+      >
         <div className="form__modal-content--task">
-          <h1>{updatedTask?.title}</h1>
+          <h1 className={darkMode ? "text--white" : ""}>
+            {updatedTask?.title}
+          </h1>
           <div className="icon__ellipses" onClick={handleClickEllipses}>
             <img src="/assets/icon-vertical-ellipsis.svg" />
           </div>
 
           <div
             id="ellipses__options--task"
-            className="ellipses__options bg--dark hidden"
+            className={`ellipses__options ${
+              darkMode ? "bg--dark" : "bg--white"
+            } hidden`}
           >
-            <p
-              className="text--medium"
-              onClick={handleClickEditTask}
-            >
+            <p className="text--medium" onClick={handleClickEditTask}>
               Edit Task
             </p>
             <p className="text--red" onClick={handleClickDeleteTask}>
@@ -95,7 +103,7 @@ const ViewTaskModal = ({ task, columns, openModal, closeModal }) => {
           {updatedTask?.description}
         </p>
 
-        <p>
+        <p className={`${darkMode ? "text--white" : ""}`}>
           Subtasks ({completedTasks} of {updatedTask?.subtasks.length})
         </p>
 
@@ -104,7 +112,7 @@ const ViewTaskModal = ({ task, columns, openModal, closeModal }) => {
           .map((subtask) => (
             <div
               key={subtask._id}
-              className="subtask-checkbox bg--dark"
+              className={`subtask-checkbox ${darkMode ? "bg--dark" : "bg--light-grey"}`}
               onClick={() => handleUpdate(subtask._id)}
             >
               <input
@@ -112,13 +120,21 @@ const ViewTaskModal = ({ task, columns, openModal, closeModal }) => {
                 checked={subtask.isCompleted}
                 onChange={() => handleUpdate(subtask._id)}
               />
-              <span data-completed={subtask.isCompleted}>{subtask.title}</span>
+              <span
+                data-completed={subtask.isCompleted}
+                className="text--medium"
+              >
+                {subtask.title}
+              </span>
             </div>
           ))}
 
         <label>
           Current Status
-          <select onChange={handleUpdateColumn}>
+          <select
+            onChange={handleUpdateColumn}
+            className={`${darkMode ? "text--white" : ""}`}
+          >
             {columns?.map((column) => (
               <option
                 selected={updatedTask?.status === column._id}

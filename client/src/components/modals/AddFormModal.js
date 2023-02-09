@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createTask } from "../../actions/tasks";
 
-const AddFormModal = ({ columns, closeModal }) => {
+const AddFormModal = ({ columns, closeModal, darkMode }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [subtasks, setSubtasks] = useState([
@@ -49,12 +49,20 @@ const AddFormModal = ({ columns, closeModal }) => {
   };
 
   return (
-    <div id="form__modal--add" className="form__modal">
-      <form className="form__modal-content bg--dark-grey">
+    <div
+      id="form__modal--add"
+      className={`form__modal ${darkMode ? "text--white" : "text--dark"}`}
+    >
+      <form
+        className={`form__modal-content ${
+          darkMode ? "bg--dark-grey" : "bg--light"
+        }`}
+      >
         <h1>Add New Task</h1>
         <label>
           Title
           <input
+            className={`${darkMode ? "text--white" : ""}`}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -77,6 +85,7 @@ const AddFormModal = ({ columns, closeModal }) => {
             .map((el, idx) => (
               <div className="subtask" key={el.idx}>
                 <input
+                  className={`${darkMode ? "text--white" : ""}`}
                   type="text"
                   value={el.title}
                   onChange={(e) => updateSubtask(e, idx)}
@@ -99,13 +108,14 @@ const AddFormModal = ({ columns, closeModal }) => {
 
         <label>
           Status
-          <select onChange={(e) => setSelectedStatus(e.target.value)} defaultValue="select">
+          <select
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            defaultValue="select"
+            className={`${darkMode ? "text--white" : ""}`}
+          >
             <option value="select">--Select status--</option>
             {columns?.map((column) => (
-              <option
-                value={column._id}
-                key={column._id}
-              >
+              <option value={column._id} key={column._id}>
                 {column.name}
               </option>
             ))}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createBoard } from "../../actions/boards";
 import { createColumn } from "../../actions/columns";
 
-const AddBoardModal = ({ selectBoard }) => {
+const AddBoardModal = ({ selectBoard, darkMode }) => {
   const [name, setName] = useState("");
   const [columns, setColumns] = useState([{ idx: 0, name: "" }]);
 
@@ -54,29 +54,38 @@ const AddBoardModal = ({ selectBoard }) => {
   }
 
   return (
-    <div id="board__modal--add" className="form__modal">
-      <form className="form__modal-content bg--dark-grey">
+    <div
+      id="board__modal--add"
+      className={`form__modal ${darkMode ? "text--white" : "text--dark"}`}
+    >
+      <form className={`form__modal-content ${darkMode ? "bg--dark-grey" : "bg--white"}`}>
         <h1>Add New Board</h1>
         <label>
           Board Name
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </label>
 
         <label>
           Board Columns
-          {columns?.sort((a, b) => a.idx - b.idx).map((el) => (
-            <div className="subtask" key={el.idx}>
-              <input
-                type="text"
-                value={el.name}
-                onChange={(e) => updateColumn(e, el.idx)}
-              />
-              <img
-                src="/assets/icon-cross.svg"
-                onClick={(e) => deleteColumn(e, el.idx)}
-              />
-            </div>
-          ))}
+          {columns
+            ?.sort((a, b) => a.idx - b.idx)
+            .map((el) => (
+              <div className="subtask" key={el.idx}>
+                <input
+                  type="text"
+                  value={el.name}
+                  onChange={(e) => updateColumn(e, el.idx)}
+                />
+                <img
+                  src="/assets/icon-cross.svg"
+                  onClick={(e) => deleteColumn(e, el.idx)}
+                />
+              </div>
+            ))}
           <div id="add-task__button" className="btn-container">
             <button
               className="btn bg--white text--main"

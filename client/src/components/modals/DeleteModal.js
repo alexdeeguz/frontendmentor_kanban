@@ -1,6 +1,6 @@
 import { deleteBoard } from "../../actions/boards";
 
-const DeleteModal = ({ closeModal, selectedBoard, fetchData }) => {
+const DeleteModal = ({ closeModal, selectedBoard, fetchData, darkMode, boardName }) => {
   const handleClickDelete = () => {
     localStorage.removeItem("board");
     deleteBoard(selectedBoard)
@@ -8,27 +8,36 @@ const DeleteModal = ({ closeModal, selectedBoard, fetchData }) => {
   };
 
   return (
-    <div id="delete__modal" className="form__modal">
-      <div className="form__modal-content bg--dark-grey">
+    <div
+      id="delete__modal"
+      className={`form__modal ${darkMode ? "text--white" : "text--dark"}`}
+    >
+      <div
+        className={`form__modal-content ${
+          darkMode ? "bg--dark-grey" : "bg--white"
+        }`}
+      >
         <h1 className="text--red">Delete this board?</h1>
         <p className="text--medium">
-          Are you sure you want to delete the 'Platform Launch' board? This
-          action will remove all columns and tasks and cannot be reversed.
+          Are you sure you want to delete the '{boardName}' board? This action
+          will remove all columns and tasks and cannot be reversed.
         </p>
 
-        <div className="btn-container">
-          <button
-            className="btn bg--red text--white"
-            onClick={handleClickDelete}
-          >
-            Delete
-          </button>
-        </div>
+        <div>
+          <div className="btn-container">
+            <button
+              className="btn bg--red text--white"
+              onClick={handleClickDelete}
+            >
+              Delete
+            </button>
+          </div>
 
-        <div className="btn-container">
-          <button className="btn bg--white text--main" onClick={closeModal}>
-            Cancel
-          </button>
+          <div className="btn-container">
+            <button className="btn bg--white text--main" onClick={closeModal}>
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>

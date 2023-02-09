@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { updateTask } from "../../actions/tasks";
 
-const EditFormModal = ({ columns, closeModal, task }) => {
+const EditFormModal = ({ columns, closeModal, task, darkMode }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [currentSubtasks, setCurrentSubtasks] = useState([])
@@ -78,12 +78,20 @@ const EditFormModal = ({ columns, closeModal, task }) => {
   };
 
   return (
-    <div id="form__modal--edit" className="form__modal">
-      <form className="form__modal-content bg--dark-grey">
+    <div
+      id="form__modal--edit"
+      className={`form__modal ${darkMode ? "text--white" : "text--dark"}`}
+    >
+      <form
+        className={`form__modal-content ${
+          darkMode ? "bg--dark-grey" : "bg--white"
+        }`}
+      >
         <h1>Edit Task</h1>
         <label>
           Title
           <input
+            className={`${darkMode ? "text--white" : ""}`}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -93,6 +101,7 @@ const EditFormModal = ({ columns, closeModal, task }) => {
         <label>
           Description
           <textarea
+            className={`${darkMode ? "text--white" : ""}`}
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -104,6 +113,7 @@ const EditFormModal = ({ columns, closeModal, task }) => {
           {currentSubtasks?.map((el) => (
             <div className="subtask" key={el._id}>
               <input
+                className={`${darkMode ? "text--white" : ""}`}
                 type="text"
                 value={el.title}
                 onChange={(e) => updateCurrentSubtasks(e, el)}
@@ -119,6 +129,7 @@ const EditFormModal = ({ columns, closeModal, task }) => {
             .map((el, idx) => (
               <div className="subtask" key={el.idx}>
                 <input
+                  className={`${darkMode ? "text--white" : ""}`}
                   type="text"
                   value={el.title}
                   onChange={(e) => updateSubtask(e, idx)}
@@ -143,9 +154,14 @@ const EditFormModal = ({ columns, closeModal, task }) => {
           Status
           <select
             onChange={(e) => setSelectedStatus(e.target.value)}
+            className={`${darkMode ? "text--white" : ""}`}
           >
             {columns?.map((column) => (
-              <option value={column._id} key={column._id} selected={selectedStatus === column._id}>
+              <option
+                value={column._id}
+                key={column._id}
+                selected={selectedStatus === column._id}
+              >
                 {column.name}
               </option>
             ))}

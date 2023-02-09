@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchTasks } from "../../../actions/tasks";
 import "../partials.css";
 
-const Column = ({ data, column, selectTask }) => {
+const Column = ({ data, column, selectTask, darkMode }) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -13,13 +13,13 @@ const Column = ({ data, column, selectTask }) => {
     <section className="column">
       <div className="column__header">
         <div className="dot"></div>
-        <h1 className="text--medium">{column.name.toUpperCase()} ({tasks.length})</h1>
+        <h1 className={`${darkMode ? "text--medium" : "text--dark"}`}>{column.name.toUpperCase()} ({tasks.length})</h1>
       </div>
 
       {tasks?.map((task) => (
-        <div key={task._id} className="column__card bg--dark-grey" onClick={() => selectTask(task)}>
-          <h2>{task.title}</h2>
-          <h3 className="text--medium">
+        <div key={task._id} className={`column__card ${darkMode ? "bg--dark-grey" : "bg--light"}`} onClick={() => selectTask(task)}>
+          <h2 className={darkMode ? "text--white" : "text--dark"}>{task.title}</h2>
+          <h3 className={`text--medium`}>
             {task.subtasks.filter((subtask) => subtask.isCompleted).length} of{" "}
             {task.subtasks.length + " "}
             subtasks

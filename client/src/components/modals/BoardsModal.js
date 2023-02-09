@@ -1,6 +1,15 @@
-const BoardsModal = ({ selectedBoard, boards, openModal, selectBoard }) => {
+const BoardsModal = ({ selectedBoard, boards, openModal, selectBoard, darkMode, setDarkMode }) => {
+  const switchTheme = () => {
+    setDarkMode(!darkMode);
+    
+    if (darkMode) {
+      document.getElementById("switch").style.justifyContent = "flex-start";
+    } else {
+      document.getElementById("switch").style.justifyContent = "flex-end"
+    }
+  }
   return (
-    <div id="boards__modal" className="boards__modal">
+    <div id="boards__modal" className={`boards__modal ${darkMode ? "bg--dark-grey" : "bg--light"}`}>
       <div className="boards__modal-content">
         <h1 className="text--medium">ALL BOARDS</h1>
         {boards?.map((board) => (
@@ -27,9 +36,9 @@ const BoardsModal = ({ selectedBoard, boards, openModal, selectBoard }) => {
           <h2>+ Create New Board</h2>
         </div>
 
-        <div className="toggle-theme__container bg--dark">
+        <div className={`toggle-theme__container ${darkMode ? "bg--dark" : "bg--light-grey"}`}>
           <img src="/assets/icon-light-theme.svg" alt="light theme" />
-          <div className="switch bg--purple">
+          <div id="switch" className="switch bg--purple" onClick={switchTheme}>
             <div></div>
           </div>
           <img src="/assets/icon-dark-theme.svg" alt="dark theme" />

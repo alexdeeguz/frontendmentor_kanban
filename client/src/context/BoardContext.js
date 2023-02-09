@@ -55,8 +55,6 @@ const BoardContextProvider = ({ children }) => {
         boardName: "",
       });
     } else {
-      // const boardName = boardsResponse?.data.find(el => el._id === board)
-      // console.log(boardName)
       setLoading(false);
       setData({
         ...data,
@@ -83,7 +81,6 @@ const BoardContextProvider = ({ children }) => {
         modalOpen: false,
         boards: boardsResponse.data,
         boardName: boardsResponse.data?.find((el) => el._id === id).name,
-        modalOpen: false,
       });
     });
   };

@@ -1,4 +1,13 @@
-.light {
+.bg--light {
+  background: #ffffff;
+}
+
+.bg--light-grey {
+  background: #F4F7FD;
+}
+
+.text--dark {
+  color: black;
 }
 
 /* dark grey */
@@ -41,7 +50,7 @@
 }
 
 body {
-  background: #20212c;
+  /* background: #20212c; */
   height: 100%;
   width: 100%;
 }
@@ -75,10 +84,11 @@ body {
 
 #overlay {
   width: 100%;
+  height: 100%;
   /* height: calc(100vh - 64px); */
-  height: 110vh;
+  /* height: 100vh - 64px; */
   position: absolute;
-  top: 0;
+  top: 64px;
   left: 0;
   z-index: 1;
   background: rgba(0, 0, 0, 0.7);

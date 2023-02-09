@@ -8,6 +8,7 @@ import AddBoardModal from "../modals/AddBoardModal";
 import EditBoardModal from "../modals/EditBoardModal";
 import DeleteModal from "../modals/DeleteModal";
 import ViewTaskModal from "../modals/ViewTask";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const NavDark = () => {
   const {
@@ -17,11 +18,14 @@ const NavDark = () => {
     selectBoard,
     fetchData,
     fetchBoardsAndColumns,
-    data: { boards, selectedBoard, otherData, columns, boardName, modalOpen },
+    data: { boards, selectedBoard, otherData, columns, boardName, modalOpen, modal },
   } = useContext(BoardContext);
+
+  const { darkMode, setDarkMode } = useContext(ThemeContext)
 
   const handleClickTitle = (e) => {
     e.preventDefault();
+    if (modalOpen && modal.id !== "boards__modal") return
     openModal("boards__modal");
   };
 
@@ -42,58 +46,69 @@ const NavDark = () => {
   if (loading) return null;
 
   return (
-    <nav className="nav bg--dark-grey">
+    <nav className={`nav ${darkMode ? "bg--dark-grey" : "bg--light"}`}>
+      {/* <nav className="nav bg--light"> */}
       <div>
         <img className="logo" src="/assets/logo-mobile.svg" />
         <div onClick={handleClickTitle}>
-          <button className="logo__title text--white">
+          <button
+            className={`logo__title ${darkMode ? "text--white" : "text--dark"}`}
+          >
             {boardName}
             <img id="icon-arrow" src="/assets/icon-chevron-down.svg" />
           </button>
         </div>
       </div>
 
-      <div className="header__right">
-        <p onClick={handleClickAddTask} className="plus__btn bg--purple">
-          +
-        </p>
-        <div className="icon__ellipses" onClick={handleClickEllipses}>
-          <img src="/assets/icon-vertical-ellipsis.svg" />
-        </div>
+      {!modalOpen && (
+        <div className="header__right">
+          <p onClick={handleClickAddTask} className="plus__btn bg--purple">
+            +
+          </p>
+          <div className="icon__ellipses" onClick={handleClickEllipses}>
+            <img src="/assets/icon-vertical-ellipsis.svg" />
+          </div>
 
-        <div
-          id="ellipses__options"
-          className="ellipses__options bg--dark hidden"
-        >
-          <p
-            className="text--medium"
-            onClick={() => openModal("board__modal--edit")}
+          <div
+            id="ellipses__options"
+            className={`ellipses__options ${
+              darkMode ? "bg--dark" : "bg--light"
+            } hidden`}
           >
-            Edit Board
-          </p>
-          <p className="text--red" onClick={() => openModal("delete__modal")}>
-            Delete Board
-          </p>
+            <p
+              className="text--medium"
+              onClick={() => openModal("board__modal--edit")}
+            >
+              Edit Board
+            </p>
+            <p className="text--red" onClick={() => openModal("delete__modal")}>
+              Delete Board
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       <BoardsModal
         selectedBoard={selectedBoard}
         boards={boards}
         openModal={openModal}
         selectBoard={selectBoard}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
       />
       <AddFormModal
         closeModal={closeModal}
         columns={columns}
         fetchData={fetchData}
+        darkMode={darkMode}
       />
       <EditFormModal
         closeModal={closeModal}
         columns={columns}
         task={otherData}
+        darkMode={darkMode}
       />
-      <AddBoardModal closeModal={closeModal} selectBoard={selectBoard} />
+      <AddBoardModal closeModal={closeModal} selectBoard={selectBoard} darkMode={darkMode}/>
       <EditBoardModal
         closeModal={closeModal}
         boardName={boardName}
@@ -102,17 +117,21 @@ const NavDark = () => {
         selectedBoard={selectedBoard}
         fetchBoardsAndColumns={fetchBoardsAndColumns}
         selectBoard={selectBoard}
+        darkMode={darkMode}
       />
       <DeleteModal
         closeModal={closeModal}
         selectedBoard={selectedBoard}
         fetchData={fetchBoardsAndColumns}
+        darkMode={darkMode}
+        boardName={boardName}
       />
       <ViewTaskModal
         closeModal={closeModal}
         task={otherData}
         columns={columns}
         openModal={openModal}
+        darkMode={darkMode}
       />
     </nav>
   );

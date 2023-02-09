@@ -9,6 +9,7 @@ const EditBoardModal = ({
   selectedBoard,
   fetchBoardsAndColumns,
   selectBoard,
+  darkMode
 }) => {
   const [name, setName] = useState(boardName);
   const [columnNames, setColumnNames] = useState(columns);
@@ -53,7 +54,6 @@ const EditBoardModal = ({
       })
     }
 
-    console.log(promises)
     Promise.all(promises);
   };
 
@@ -99,8 +99,11 @@ const EditBoardModal = ({
   };
 
   return (
-    <div id="board__modal--edit" className="form__modal">
-      <form className="form__modal-content bg--dark-grey">
+    <div
+      id="board__modal--edit"
+      className={`form__modal ${darkMode ? "text--white" : "text--dark"}`}
+    >
+      <form className={`form__modal-content ${darkMode ? "bg--dark-grey" : "bg--white"}`}>
         <h1>Edit Board</h1>
         <label>
           Board Name
