@@ -32,7 +32,7 @@ const DeleteModal = ({ closeModal, selectedBoard, fetchData, darkMode, boardName
               Delete
             </button>
           </div>
-
+          <br/>
           <div className="btn-container">
             <button className="btn bg--white text--main" onClick={closeModal}>
               Cancel
