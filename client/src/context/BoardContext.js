@@ -13,8 +13,9 @@ const BoardContextProvider = ({ children }) => {
   }, []);
 
   const fetchBoardsAndColumns = async () => {
+    let columnsRes
     const boardsRes = await fetchBoards();
-    const columnsRes = await fetchColumns(boardsRes.data[0]._id);
+    if (boardsRes.data.length) columnsRes = await fetchColumns(boardsRes.data[0]._id);
     const overlay = document.getElementById("overlay");
     data.modal.style.transform = "scale(0)";
     overlay.style.display = "none";
@@ -44,26 +45,28 @@ const BoardContextProvider = ({ children }) => {
         ? await fetchColumns(currentBoard._id)
         : await fetchColumns(board);
 
-    if (board === null) {
-      localStorage.setItem("board", currentBoard._id);
-      setLoading(false);
+    // if (board === null) {
+    //   localStorage.setItem("board", currentBoard._id);
+    //   setLoading(false);
+    //   setData({
+    //     ...data,
+    //     selectedBoard: currentBoard,
+    //     boards: boardsResponse.data,
+    //     columns: columnsResponse.data,
+    //     boardName: "",
+    //   });
+    // } else {
+      // setLoading(false);
       setData({
         ...data,
-        selectedBoard: currentBoard,
+        selectedBoard: board ? board : boardsResponse?.data[0]._id,
         boards: boardsResponse.data,
         columns: columnsResponse.data,
-        boardName: "",
+        boardName: boardsResponse?.data.find((el) => el._id === board)
+          ? boardsResponse?.data.find((el) => el._id === board).name
+          : boardsResponse?.data[0].name,
       });
-    } else {
-      setLoading(false);
-      setData({
-        ...data,
-        selectedBoard: board,
-        boards: boardsResponse.data,
-        columns: columnsResponse.data,
-        boardName: boardsResponse?.data.find((el) => el._id === board).name,
-      });
-    }
+    // }
     closeModal();
     // closeDrawer()
     setLoading(false);

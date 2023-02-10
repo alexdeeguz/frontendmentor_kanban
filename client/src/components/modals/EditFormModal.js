@@ -8,7 +8,9 @@ const EditFormModal = ({ columns, closeModal, task, darkMode }) => {
   const [subtasks, setSubtasks] = useState([
     // { idx: 0, title: "", isCompleted: false },
   ]);
-  const [selectedStatus, setSelectedStatus] = useState(columns[0]._id);
+  const [selectedStatus, setSelectedStatus] = useState(
+    columns?.length ? columns[0]._id : ""
+  );
 
   useEffect(() => {
     if (!task) return

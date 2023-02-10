@@ -9,7 +9,7 @@ const EditBoardModal = ({
   selectedBoard,
   fetchBoardsAndColumns,
   selectBoard,
-  darkMode
+  darkMode,
 }) => {
   const [name, setName] = useState(boardName);
   const [columnNames, setColumnNames] = useState(columns);
@@ -49,9 +49,9 @@ const EditBoardModal = ({
     }
 
     if (columnsToDelete.length) {
-      columnsToDelete.forEach(col => {
-        promises.push(deleteColumn(col._id))
-      })
+      columnsToDelete.forEach((col) => {
+        promises.push(deleteColumn(col._id));
+      });
     }
 
     Promise.all(promises);
@@ -79,7 +79,7 @@ const EditBoardModal = ({
         newCols.push(el);
       }
     });
-    setColumnNames(newCols)
+    setColumnNames(newCols);
     setColumnsToDelete([...columnsToDelete, column]);
   };
 
@@ -103,11 +103,16 @@ const EditBoardModal = ({
       id="board__modal--edit"
       className={`form__modal ${darkMode ? "text--white" : "text--dark"}`}
     >
-      <form className={`form__modal-content ${darkMode ? "bg--dark-grey" : "bg--white"}`}>
+      <form
+        className={`form__modal-content ${
+          darkMode ? "bg--dark-grey" : "bg--white"
+        }`}
+      >
         <h1>Edit Board</h1>
         <label>
           Board Name
           <input
+            className={`${darkMode ? "text--white" : ""}`}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -119,6 +124,7 @@ const EditBoardModal = ({
           {columnNames?.map((el) => (
             <div className="subtask" key={el._id}>
               <input
+                className={`${darkMode ? "text--white" : ""}`}
                 type="text"
                 value={el.name}
                 onChange={(e) => handleUpdate(e, el._id)}
@@ -132,6 +138,7 @@ const EditBoardModal = ({
           {newColumns.map((el) => (
             <div className="subtask" key={el.idx}>
               <input
+                className={`${darkMode ? "text--white" : ""}`}
                 type="text"
                 value={el.name}
                 onChange={(e) => updateColumn(e, el.idx)}

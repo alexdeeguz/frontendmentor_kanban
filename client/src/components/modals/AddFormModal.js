@@ -7,7 +7,7 @@ const AddFormModal = ({ columns, closeModal, darkMode }) => {
   const [subtasks, setSubtasks] = useState([
     { idx: 0, title: "", isCompleted: false },
   ]);
-  const [selectedStatus, setSelectedStatus] = useState(columns[0]._id);
+  const [selectedStatus, setSelectedStatus] = useState(columns?.length ? columns[0]._id : "");
   const handleSubmit = (e) => {
     e.preventDefault();
     createTask({ title, description, status: selectedStatus, subtasks }).then(
