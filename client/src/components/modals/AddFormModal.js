@@ -8,8 +8,17 @@ const AddFormModal = ({ columns, closeModal, darkMode }) => {
     { idx: 0, title: "", isCompleted: false },
   ]);
   const [selectedStatus, setSelectedStatus] = useState(columns?.length ? columns[0]._id : "");
+  const [error, setError] = useState(null)
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (title === "" || selectedStatus === "select" || selectedStatus === "") {
+      setError("Title and status can't be blank")
+      setTimeout(() => {
+        setError(null)
+      }, 3000)
+      return
+    }
     createTask({ title, description, status: selectedStatus, subtasks }).then(
       () => {
         closeModal();
@@ -129,6 +138,7 @@ const AddFormModal = ({ columns, closeModal, darkMode }) => {
             </button>
           </div>
         </label>
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );

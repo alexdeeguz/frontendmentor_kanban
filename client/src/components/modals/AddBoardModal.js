@@ -5,6 +5,7 @@ import { createColumn } from "../../actions/columns";
 const AddBoardModal = ({ selectBoard, darkMode }) => {
   const [name, setName] = useState("");
   const [columns, setColumns] = useState([]);
+  const [error, setError] = useState(null)
 
   const addColumn = (e, idx) => {
     e.preventDefault();
@@ -39,6 +40,13 @@ const AddBoardModal = ({ selectBoard, darkMode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (name === "") {
+      setError("Board name can't be blank")
+      setTimeout(() => {
+        setError(null)
+      }, 3000)
+      return
+    }
     let promises = [];
     createBoard({ name }).then((res) => {
       columns.forEach((el) => {
@@ -106,6 +114,7 @@ const AddBoardModal = ({ selectBoard, darkMode }) => {
             Create New Board
           </button>
         </div>
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );

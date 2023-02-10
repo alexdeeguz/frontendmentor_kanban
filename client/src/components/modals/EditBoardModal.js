@@ -15,6 +15,7 @@ const EditBoardModal = ({
   const [columnNames, setColumnNames] = useState(columns);
   const [newColumns, setNewColumns] = useState([]);
   const [columnsToDelete, setColumnsToDelete] = useState([]);
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     setName(boardName);
@@ -36,7 +37,13 @@ const EditBoardModal = ({
 
   const handleClickSave = (e) => {
     e.preventDefault();
-
+    if (name === "") {
+      setError("Board name can't be blank")
+      setTimeout(() => {
+        setError(null)
+      }, 3000)
+      return
+    }
     editBoard(selectedBoard, columnNames, name).then((res) => {
       selectBoard(selectedBoard);
     });
@@ -164,6 +171,7 @@ const EditBoardModal = ({
             Save Changes
           </button>
         </div>
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );

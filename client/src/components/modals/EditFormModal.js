@@ -11,6 +11,7 @@ const EditFormModal = ({ columns, closeModal, task, darkMode }) => {
   const [selectedStatus, setSelectedStatus] = useState(
     columns?.length ? columns[0]._id : ""
   );
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     if (!task) return
@@ -23,6 +24,13 @@ const EditFormModal = ({ columns, closeModal, task, darkMode }) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (title === "") {
+      setError("Title can't be blank")
+      setTimeout(() => {
+        setError(null)
+      }, 3000)
+      return
+    }
     const data = { title, description, status: selectedStatus, subtasks: [...subtasks, ...currentSubtasks] }
     updateTask(task._id, data).then(
       () => {
@@ -177,6 +185,7 @@ const EditFormModal = ({ columns, closeModal, task, darkMode }) => {
             </button>
           </div>
         </label>
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );
