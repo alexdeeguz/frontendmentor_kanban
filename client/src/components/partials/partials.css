@@ -68,3 +68,28 @@
   font-size: 12px;
   line-height: 15px;
 }
+
+.empty-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 64px);
+}
+
+.empty-message > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-message > div:last-child > h1  {
+font-size: 18px;
+line-height: 23px;
+margin-bottom: .625rem;
+}
+
+#add-board-btn {
+  width: 30%;
+}

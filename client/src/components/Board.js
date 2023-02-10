@@ -15,6 +15,31 @@ const Home = () => {
 
   const { darkMode } = useContext(ThemeContext)
 
+    const handleClickAddBoard = (e) => {
+      e.preventDefault();
+      openModal("board__modal--edit");
+    };
+
+  if (data?.columns) {
+    if (!data.columns.length) {
+      return (
+        <div className={`empty-message ${darkMode ? "bg--dark" : "bg--light-grey"}`}>
+
+            <Overlay closeModal={closeModal} />
+            <div>
+              <h1 className={darkMode ? "text--white" : "text--medium"}>This board is empty. Create a new column to get started</h1>
+              <button
+                id="add-board-btn" className="btn bg--purple text--white"
+                onClick={handleClickAddBoard}
+              >
+                +Add New Board
+              </button>
+            </div>
+        </div>
+      );
+
+    }
+  }
   return (
     <div className={`home ${darkMode ? "bg--dark" : "bg--light-grey"}`}>
       <div>

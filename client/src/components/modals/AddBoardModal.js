@@ -4,18 +4,18 @@ import { createColumn } from "../../actions/columns";
 
 const AddBoardModal = ({ selectBoard, darkMode }) => {
   const [name, setName] = useState("");
-  const [columns, setColumns] = useState([{ idx: 0, name: "" }]);
+  const [columns, setColumns] = useState([]);
 
   const addColumn = (e, idx) => {
     e.preventDefault();
 
-    setColumns([...columns, { idx, name: "" }]);
+    setColumns([...columns, { idx: columns?.length, name: "" }]);
   };
 
   const deleteColumn = (e, idx) => {
     e.preventDefault();
     let newCols = [];
-    columns.forEach((col) => {
+    columns?.forEach((col) => {
       if (idx !== col.idx) newCols.push(col);
     });
 
