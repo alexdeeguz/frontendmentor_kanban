@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchTasks } from "../../../actions/tasks";
 import "../partials.css";
 
-const Column = ({ data, column, selectTask, darkMode }) => {
+const Column = ({ data, column, selectTask, darkMode, index }) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const Column = ({ data, column, selectTask, darkMode }) => {
   return (
     <section className="column">
       <div className="column__header">
-        <div className="dot"></div>
+        <div className={`dot dot-${index}`}></div>
         <h1 className={`${darkMode ? "text--medium" : "text--dark"}`}>{column.name.toUpperCase()} ({tasks.length})</h1>
       </div>
 

@@ -33,11 +33,22 @@
   margin-bottom: 24px;
 }
 
-.column__header > div {
+.column__header > .dot {
   width: 15px;
   height: 15px;
-  background: #49c4e5;
   border-radius: 100%;
+}
+
+.dot-0 {
+    background: #49c4e5;
+}
+
+.dot-1 {
+  background: #8471F2;
+}
+
+.dot-2 {
+  background: #67E2AE;
 }
 
 .column__header > h1 {
